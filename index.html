@@ -1,0 +1,3235 @@
+Отличная идея! Создам полную документацию для **ESYBOT** в одном HTML файле в стиле ALT KDE Wiki с поддержкой русского и английского языков:
+
+```html
+
+
+
+    
+    
+    ESYBOT Documentation
+    
+    🤖">
+    
+    
+    
+    
+    
+    
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #1e40af;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-light: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: #475569;
+            --accent: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --sidebar-width: 280px;
+            --header-height: 64px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Заголовок */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            color: var(--text-primary);
+            width: 300px;
+            font-size: 0.875rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        .lang-switcher {
+            display: flex;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: var(--surface-light);
+            color: var(--text-primary);
+        }
+
+        /* Боковая панель */
+        .sidebar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: var(--sidebar-width);
+            height: calc(100vh - var(--header-height));
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            z-index: 999;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+
+        .nav-section {
+            padding: 1.5rem 0 0.5rem 0;
+        }
+
+        .nav-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            padding: 0 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: var(--surface-light);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: rgba(59, 130, 246, 0.1);
+            border-left-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Основной контент */
+        .main {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+            transition: margin-left 0.3s ease;
+        }
+
+        .main.expanded {
+            margin-left: 0;
+        }
+
+        .content {
+            max-width: 900px;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Типографика */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .lead {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Код */
+        pre {
+            background: var(--background) !important;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+
+        code {
+            background: var(--surface-light);
+            color: var(--accent);
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Карточки */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-light);
+        }
+
+        /* Алерты */
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: rgba(59, 130, 246, 0.1);
+            border-left-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left-color: var(--warning);
+            color: var(--text-primary);
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        /* Таблицы */
+        .table-container {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--surface-light);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        /* Мобильная адаптация */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page.active {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Скролл */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--surface-light);
+        }
+
+        /* Подсветка кода для ESYBOT */
+        .language-esybot {
+            color: var(--text-primary);
+        }
+
+        .language-esybot .hljs-keyword {
+            color: #ff79c6;
+        }
+
+        .language-esybot .hljs-string {
+            color: #f1fa8c;
+        }
+
+        .language-esybot .hljs-comment {
+            color: var(--text-muted);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .command-table {
+            margin: 1.5rem 0;
+        }
+
+        .command-row {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .command-name {
+            font-weight: 600;
+            color: var(--accent);
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        .example-container {
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+    
+
+
+    
+    
+        
+            ☰
+            
+                🤖
+                ESYBOT
+            
+            
+                
+                    
+                
+                
+                    RU
+                    EN
+                
+            
+        
+    
+
+    
+    
+        
+            Начало работы
+            Главная
+            Начало работы
+        
+        
+            Документация
+            Синтаксис
+            Команды
+            Python интеграция
+            Примеры
+        
+        
+            Справочник
+            API
+        
+    
+
+    
+    
+        
+            
+            
+                
+                    ESYBOT
+                    Революционный язык для создания Telegram ботов
+                    
+                        ESYBOT упрощает создание мощных Telegram ботов с интеграцией Python, поддержкой всех возможностей aiogram и интуитивным синтаксисом.
+                    
+                    
+                        🚀 Быстрый старт
+                        📚 Примеры
+                    
+                
+
+                Возможности ESYBOT
+                
+                    
+                        🎯
+                        Простой синтаксис
+                        
+                            Интуитивные команды для быстрого создания ботов без изучения сложного API
+                        
+                    
+                    
+                        🐍
+                        Python интеграция
+                        
+                            Полная поддержка Python кода внутри ESYBOT с обменом переменными
+                        
+                    
+                    
+                        ⚡
+                        Поддержка aiogram
+                        
+                            Все возможности aiogram 3.x доступны из коробки
+                        
+                    
+                    
+                        🔧
+                        Расширяемость
+                        
+                            Легко добавляйте новые функции и интегрируйте с внешними сервисами
+                        
+                    
+                
+
+                Быстрый пример
+                Создайте своего первого бота за несколько минут:
+                
+                
+                    Копировать
+                    # Простой бот на ESYBOT
+bot_token "YOUR_BOT_TOKEN"
+
+# Приветствие при старте
+on_start {
+    send "🤖 Привет! Я бот, созданный с помощью ESYBOT!"
+}
+
+# Обработка команды помощи
+on_command help {
+    reply "Я умею отвечать на сообщения и выполнять команды!"
+}
+
+# Python интеграция
+on_message "привет" {
+    python {
+        import random
+        greetings = ["Привет!", "Здравствуй!", "Добро пожаловать!"]
+        greeting = random.choice(greetings)
+        esybot_set('random_greeting', greeting)
+    }
+    reply $random_greeting
+}
+                
+            
+
+            
+            
+                Начало работы с ESYBOT
+                
+                    Пошаговое руководство по установке и настройке ESYBOT для создания вашего первого Telegram бота.
+                
+
+                Установка
+                
+                Требования
+                
+                    Python 3.8 или выше
+                    pip (менеджер пакетов Python)
+                    Токен Telegram бота от @BotFather
+                
+
+                Настройка окружения
+                
+                    Копировать
+                    # Создание виртуального окружения
+python -m venv esybot-env
+
+# Активация окружения
+# Windows:
+esybot-env\Scripts\activate
+# Linux/Mac:
+source esybot-env/bin/activate
+
+# Установка зависимостей
+pip install aiogram psutil
+                
+
+                Скачивание ESYBOT
+                
+                    Копировать
+                    # Клонирование репозитория
+git clone https://github.com/your-username/esybot.git
+cd esybot
+
+# Или скачайте интерпретатор напрямую
+wget https://raw.githubusercontent.com/your-username/esybot/main/esybot_interpreter.py
+                
+
+                Первый бот
+
+                
+                    💡 Совет: Перед началом получите токен бота у @BotFather в Telegram.
+                
+
+                1. Создание файла бота
+                Создайте файл my_first_bot.esi:
+                
+                
+                    Копировать
+                    # Мой первый ESYBOT бот
+bot_token "ЗАМЕНИТЕ_НА_ВАШ_ТОКЕН"
+bot_name "MyFirstBot"
+
+# Переменные
+set welcome_message "Добро пожаловать в мой первый бот!"
+set user_count 0
+
+# Главное меню
+menu main_menu {
+    button "ℹ️ О боте" about_callback
+    button "📊 Статистика" stats_callback
+    button "🎲 Случайное число" random_callback
+}
+
+# Обработчик команды /start
+on_start {
+    increment user_count
+    send $welcome_message
+    send "Выберите действие:" keyboard=main_menu
+}
+
+# Обработчик кнопки "О боте"
+on_callback about_callback {
+    edit "🤖 Я создан с помощью ESYBOT!\n\nESYBOT - это простой язык для создания Telegram ботов."
+    answer_callback "Информация показана!"
+}
+
+# Обработчик кнопки "Статистика"
+on_callback stats_callback {
+    edit "📊 Статистика бота:\n\n👥 Пользователей: $user_count"
+    answer_callback "Статистика обновлена!"
+}
+
+# Обработчик кнопки "Случайное число"
+on_callback random_callback {
+    python {
+        import random
+        random_num = random.randint(1, 100)
+        esybot_set('random_number', random_num)
+    }
+    edit "🎲 Ваше случайное число: $random_number"
+    answer_callback "Новое число сгенерировано!"
+}
+                
+
+                2. Запуск бота
+                
+                    Копировать
+                    # Запуск интерпретатора
+python esybot_interpreter.py my_first_bot.esi
+                
+
+                
+                    🎉 Поздравляем! Ваш первый ESYBOT бот готов к использованию! Найдите его в Telegram и отправьте команду /start.
+                
+
+                Что дальше?
+                
+                    Изучите синтаксис ESYBOT
+                    Посмотрите примеры ботов
+                    Изучите интеграцию с Python
+                    Ознакомьтесь со всеми командами
+                
+            
+
+            
+            
+                Синтаксис ESYBOT
+                
+                    Полное описание синтаксиса и структуры языка ESYBOT с примерами использования.
+                
+
+                Базовая структура
+                Файл ESYBOT состоит из команд, блоков и комментариев:
+                
+                
+                    Копировать
+                    # Комментарий - игнорируется интерпретатором
+
+# Конфигурация бота
+bot_token "YOUR_TOKEN"
+bot_name "MyBot"
+
+# Переменная
+set variable_name "значение"
+
+# Команда с блоком
+on_start {
+    send "Привет!"
+    reply "Как дела?"
+}
+                
+
+                Комментарии
+                ESYBOT поддерживает однострочные комментарии, начинающиеся с # или //:
+                
+                
+                    Копировать
+                    # Это комментарий
+// Это тоже комментарий
+
+on_start {
+    send "Привет!" # Комментарий в конце строки
+    // reply "Эта строка закомментирована"
+}
+                
+
+                Переменные
+                Переменные объявляются командой set и используются с префиксом $:
+                
+                
+                    Копировать
+                    # Объявление переменных
+set bot_name "МойБот"
+set user_count 0
+set is_active true
+set price 19.99
+
+# Использование переменных
+on_start {
+    send "Добро пожаловать в $bot_name!"
+    send "Пользователей: $user_count"
+}
+
+# Изменение переменных
+on_command stats {
+    increment user_count
+    send "Новое количество: $user_count"
+}
+                
+
+                Типы данных
+                
+                    
+                        
+                            
+                                Тип
+                                Пример
+                                Описание
+                            
+                        
+                        
+                            
+                                Строка
+                                "Привет мир"
+                                Текст в кавычках
+                            
+                            
+                                Число
+                                42
+                                Целое число
+                            
+                            
+                                Дробь
+                                3.14
+                                Число с плавающей точкой
+                            
+                            
+                                Булево
+                                true / false
+                                Логическое значение
+                            
+                            
+                                Массив
+                                [1, 2, 3]
+                                Список значений
+                            
+                        
+                    
+                
+
+                Блоки кода
+                Блоки кода заключаются в фигурные скобки {}:
+                
+                
+                    Копировать
+                    # Простой блок
+on_start {
+    send "Одна команда"
+}
+
+# Многострочный блок
+on_command help {
+    send "Добро пожаловать в справку!"
+    send "Доступные команды:"
+    send "• /start - запуск бота"
+    send "• /help - эта справка"
+    
+    python {
+        # Python код тоже в блоках
+        print("Справка показана пользователю")
+    }
+}
+                
+
+                Условия
+                ESYBOT поддерживает условные конструкции:
+                
+                
+                    Копировать
+                    set admin_id 123456789
+
+on_command admin {
+    if $user_id == $admin_id {
+        send "Добро пожаловать, администратор!"
+    }
+    
+    if $user_id != $admin_id {
+        send "У вас нет прав администратора"
+    }
+}
+                
+
+                Операторы сравнения
+                
+                    
+                        
+                            
+                                Оператор
+                                Описание
+                                Пример
+                            
+                        
+                        
+                            
+                                ==
+                                Равно
+                                if $count == 5
+                            
+                            
+                                !=
+                                Не равно
+                                if $name != "admin"
+                            
+                            
+                                &gt;
+                                Больше
+                                if $age > 18
+                            
+                            
+                                &lt;
+                                Меньше
+                                if $price 
+                            
+                            
+                                contains
+                                Содержит
+                                if $text contains "привет"
+                            
+                        
+                    
+                
+
+                Обработчики событий
+                Обработчики реагируют на различные события Telegram:
+                
+                
+                    Копировать
+                    # Обработчик команды /start
+on_start {
+    send "Бот запущен!"
+}
+
+# Обработчик произвольной команды
+on_command weather {
+    send "Сегодня солнечно!"
+}
+
+# Обработчик текстовых сообщений
+on_message "привет" {
+    reply "Привет! Как дела?"
+}
+
+# Обработчик с регулярным выражением
+on_message "/привет.*/" {
+    reply "Обнаружено приветствие!"
+}
+
+# Обработчик фотографий
+on_photo {
+    reply "Красивое фото!"
+}
+
+# Обработчик callback кнопок
+on_callback button_data {
+    edit "Кнопка нажата!"
+    answer_callback "Готово!"
+}
+                
+
+                
+                    💡 Совет: Используйте регулярные выражения в обработчиках, заключая их в /pattern/ для более гибкой обработки сообщений.
+                
+            
+
+            
+            
+                Справочник команд
+                
+                    Полный список всех команд ESYBOT с описанием, параметрами и примерами использования.
+                
+
+                ⚙️ Конфигурация бота
+                
+                    
+                        
+                            
+                                Команда
+                                Описание
+                                Пример
+                            
+                        
+                        
+                            
+                                bot_token
+                                Устанавливает токен бота
+                                bot_token "YOUR_TOKEN"
+                            
+                            
+                                bot_name
+                                Имя бота
+                                bot_name "MyBot"
+                            
+                            
+                                bot_description
+                                Описание бота
+                                bot_description "Мой первый бот"
+                            
+                            
+                                bot_commands
+                                Список команд для меню
+                                См. пример ниже
+                            
+                        
+                    
+                
+
+                
+                    Копировать
+                    # Настройка команд бота
+bot_commands {
+    start "Запустить бота"
+    help "Получить справку"
+    settings "Настройки"
+    about "О боте"
+}
+                
+
+                🎯 Обработчики событий
+                
+                    
+                        
+                            
+                                Обработчик
+                                Событие
+                                Пример
+                            
+                        
+                        
+                            
+                                on_start
+                                Команда /start
+                                on_start { send "Привет!" }
+                            
+                            
+                                on_command
+                                Произвольная команда
+                                on_command help { ... }
+                            
+                            
+                                on_message
+                                Текстовое сообщение
+                                on_message "привет" { ... }
+                            
+                            
+                                on_callback
+                                Нажатие кнопки
+                                on_callback btn_data { ... }
+                            
+                            
+                                on_photo
+                                Получение фото
+                                on_photo { reply "Фото получено!" }
+                            
+                            
+                                on_video
+                                Получение видео
+                                on_video { reply "Видео получено!" }
+                            
+                            
+                                on_document
+                                Получение документа
+                                on_document { reply "Документ получен!" }
+                            
+                            
+                                on_voice
+                                Голосовое сообщение
+                                on_voice { reply "Голос получен!" }
+                            
+                            
+                                on_location
+                                Получение геолокации
+                                on_location { reply "Локация получена!" }
+                            
+                            
+                                on_contact
+                                Получение контакта
+                                on_contact { reply "Контакт получен!" }
+                            
+                        
+                    
+                
+
+                💬 Ответы и действия
+                
+                    
+                        
+                            
+                                Команда
+                                Описание
+                                Параметры
+                            
+                        
+                        
+                            
+                                send
+                                Отправить сообщение
+                                keyboard, parse_mode
+                            
+                            
+                                reply
+                                Ответить на сообщение
+                                keyboard, parse_mode
+                            
+                            
+                                edit
+                                Редактировать сообщение
+                                keyboard, parse_mode
+                            
+                            
+                                delete
+                                Удалить сообщение
+                                Нет
+                            
+                            
+                                send_photo
+                                Отправить фото
+                                caption, keyboard
+                            
+                            
+                                send_video
+                                Отправить видео
+                                caption, keyboard
+                            
+                            
+                                send_document
+                                Отправить документ
+                                caption, keyboard
+                            
+                            
+                                answer_callback
+                                Ответить на callback
+                                alert
+                            
+                        
+                    
+                
+
+                
+                    Копировать
+                    # Примеры команд ответа
+on_start {
+    send "Простое сообщение"
+    send "Сообщение с клавиатурой" keyboard=main_menu
+    send "**Жирный текст**" parse_mode="Markdown"
+}
+
+on_photo {
+    reply "Красивое фото!" 
+    send_photo "path/to/photo.jpg" caption="Моё фото"
+}
+
+on_callback help_btn {
+    edit "Текст справки"
+    answer_callback "Справка показана!" alert=false
+}
+                
+
+                ⌨️ Клавиатуры и меню
+                
+                Inline клавиатуры
+                
+                    Копировать
+                    # Создание inline меню
+menu main_menu {
+    button "ℹ️ Информация" info_callback
+    button "⚙️ Настройки" settings_callback
+    button "📊 Статистика" stats_callback new_row=true
+    button "🌐 Сайт" site_btn url="https://example.com"
+}
+
+# Использование меню
+on_start {
+    send "Выберите действие:" keyboard=main_menu
+}
+                
+
+                Reply клавиатуры
+                
+                    Копировать
+                    # Создание reply клавиатуры
+keyboard reply_kb {
+    button "🏠 Главная"
+    button "📞 Контакты"
+    button "❓ Помощь" new_row=true
+}
+
+# Удаление клавиатуры
+remove_keyboard hide_kb
+                
+
+                📊 Переменные
+                
+                    
+                        
+                            
+                                Команда
+                                Описание
+                                Пример
+                            
+                        
+                        
+                            
+                                set
+                                Установить переменную
+                                set name "Значение"
+                            
+                            
+                                get
+                                Получить переменную
+                                get name
+                            
+                            
+                                increment
+                                Увеличить на 1
+                                increment counter
+                            
+                            
+                                decrement
+                                Уменьшить на 1
+                                decrement counter
+                            
+                        
+                    
+                
+
+                Системные переменные
+                ESYBOT предоставляет доступ к контекстным переменным:
+                
+                    
+                        
+                            
+                                Переменная
+                                Описание
+                                Пример использования
+                            
+                        
+                        
+                            
+                                $user_id
+                                ID пользователя
+                                send "Ваш ID: $user_id"
+                            
+                            
+                                $chat_id
+                                ID чата
+                                send "ID чата: $chat_id"
+                            
+                            
+                                $text
+                                Текст сообщения
+                                send "Вы написали: $text"
+                            
+                            
+                                $first_name
+                                Имя пользователя
+                                send "Привет, $first_name!"
+                            
+                            
+                                $username
+                                Username пользователя
+                                send "Ваш username: $username"
+                            
+                        
+                    
+                
+
+                🔄 Состояния (FSM)
+                
+                    Копировать
+                    # Работа с состояниями
+on_command register {
+    send "Введите ваше имя:"
+    set_state waiting_name
+}
+
+on_message {
+    if $state == "waiting_name" {
+        set user_name $text
+        send "Теперь введите возраст:"
+        set_state waiting_age
+    }
+    
+    if $state == "waiting_age" {
+        set user_age $text
+        send "Регистрация завершена!\nИмя: $user_name\nВозраст: $user_age"
+        clear_state
+    }
+}
+                
+
+                
+                    ⚠️ Внимание: Состояния работают только в приватных чатах с ботом. В группах используйте альтернативные подходы.
+                
+            
+
+            
+            
+                Python интеграция
+                
+                    Полное руководство по использованию Python кода внутри ESYBOT скриптов для создания мощных и гибких ботов.
+                
+
+                🐍 Основы Python блоков
+                Python код в ESYBOT заключается в блоки python { }:
+                
+                
+                    Копировать
+                    # Простой Python блок
+on_start {
+    python {
+        print("Бот запущен!")
+        import datetime
+        current_time = datetime.datetime.now().strftime("%H:%M:%S")
+        print(f"Время запуска: {current_time}")
+    }
+    
+    send "Добро пожаловать!"
+}
+                
+
+                🔄 Обмен переменными
+                Python код может читать и изменять переменные ESYBOT:
+                
+                
+                    Копировать
+                    # Установка переменных из ESYBOT
+set user_count 0
+set bot_name "MyBot"
+
+on_start {
+    increment user_count
+    
+    python {
+        # Получение переменных ESYBOT
+        count = esybot_get('user_count')
+        name = esybot_get('bot_name')
+        
+        # Обработка в Python
+        if count == 1:
+            welcome_msg = f"Добро пожаловать в {name}! Вы первый пользователь!"
+        else:
+            welcome_msg = f"Добро пожаловать в {name}! Пользователь #{count}"
+        
+        # Установка новой переменной
+        esybot_set('welcome_message', welcome_msg)
+        
+        # Логирование
+        print(f"Новый пользователь #{count}")
+    }
+    
+    send $welcome_message
+}
+                
+
+                Функции для работы с переменными
+                
+                    
+                        
+                            
+                                Функция
+                                Описание
+                                Пример
+                            
+                        
+                        
+                            
+                                esybot_get(name)
+                                Получить переменную
+                                value = esybot_get('count')
+                            
+                            
+                                esybot_set(name, value)
+                                Установить переменную
+                                esybot_set('result', 42)
+                            
+                            
+                                esybot_vars
+                                Словарь всех переменных
+                                all_vars = esybot_vars
+                            
+                        
+                    
+                
+
+                📧 Доступ к контексту
+                В Python блоках доступны переменные контекста сообщения:
+                
+                
+                    Копировать
+                    on_message {
+    python {
+        # Доступ к данным сообщения
+        user_id = locals().get('user_id')
+        chat_id = locals().get('chat_id') 
+        message_text = locals().get('text', '')
+        
+        # Информация о пользователе
+        update = locals().get('update')
+        if update and hasattr(update, 'from_user'):
+            user = update.from_user
+            first_name = user.first_name
+            username = user.username
+            
+            # Создание персонализированного ответа
+            if username:
+                greeting = f"Привет, @{username} ({first_name})!"
+            else:
+                greeting = f"Привет, {first_name}!"
+            
+            esybot_set('personal_greeting', greeting)
+        
+        # Анализ текста сообщения
+        word_count = len(message_text.split())
+        esybot_set('word_count', word_count)
+    }
+    
+    reply $personal_greeting
+    if $word_count > 5 {
+        send "Ого, много слов! Количество: $word_count"
+    }
+}
+                
+
+                🚀 Продвинутые возможности
+                
+                Работа с внешними API
+                
+                    Копировать
+                    on_command weather {
+    python {
+        import requests
+        import json
+        
+        # Пример запроса к API погоды
+        city = "Moscow"
+        api_key = "YOUR_API_KEY"
+        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=ru"
+        
+        try:
+            response = requests.get(url)
+            data = response.json()
+            
+            if response.status_code == 200:
+                temp = data['main']['temp']
+                description = data['weather'][0]['description']
+                weather_info = f"🌤️ Погода в {city}:\n🌡️ {temp}°C\n☁️ {description.capitalize()}"
+            else:
+                weather_info = "❌ Не удалось получить данные о погоде"
+                
+        except Exception as e:
+            weather_info = f"❌ Ошибка: {str(e)}"
+        
+        esybot_set('weather_result', weather_info)
+    }
+    
+    send $weather_result
+}
+                
+
+                Работа с базами данных
+                
+                    Копировать
+                    on_command save_data {
+    python {
+        import sqlite3
+        import os
+        
+        # Создание/подключение к базе данных
+        db_path = "bot_data.db"
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        
+        # Создание таблицы, если не существует
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                user_id INTEGER PRIMARY KEY,
+                username TEXT,
+                first_name TEXT,
+                message_count INTEGER DEFAULT 0
+            )
+        ''')
+        
+        # Получение данных пользователя
+        user_id = locals().get('user_id')
+        update = locals().get('update')
+        
+        if update and hasattr(update, 'from_user'):
+            user = update.from_user
+            username = user.username
+            first_name = user.first_name
+            
+            # Вставка или обновление данных
+            cursor.execute('''
+                INSERT OR REPLACE INTO users (user_id, username, first_name, message_count)
+                VALUES (?, ?, ?, COALESCE((SELECT message_count FROM users WHERE user_id = ?) + 1, 1))
+            ''', (user_id, username, first_name, user_id))
+            
+            # Получение количества сообщений
+            cursor.execute('SELECT message_count FROM users WHERE user_id = ?', (user_id,))
+            count = cursor.fetchone()[0]
+            
+            esybot_set('user_message_count', count)
+        
+        conn.commit()
+        conn.close()
+    }
+    
+    send "✅ Данные сохранены! Ваше сообщение №$user_message_count"
+}
+                
+
+                Генерация изображений
+                
+                    Копировать
+                    on_command chart {
+    python {
+        import matplotlib.pyplot as plt
+        import io
+        import base64
+        from datetime import datetime, timedelta
+        import random
+        
+        # Генерация данных для графика
+        dates = [datetime.now() - timedelta(days=i) for i in range(7, 0, -1)]
+        values = [random.randint(10, 100) for _ in range(7)]
+        
+        # Создание графика
+        plt.figure(figsize=(10, 6))
+        plt.plot(dates, values, marker='o', linewidth=2, markersize=8)
+        plt.title('Статистика за неделю', fontsize=16, fontweight='bold')
+        plt.xlabel('Дата')
+        plt.ylabel('Значения')
+        plt.grid(True, alpha=0.3)
+        plt.tight_layout()
+        
+        # Сохранение в память
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png', dpi=300, bbox_inches='tight')
+        buffer.seek(0)
+        
+        # Сохранение в файл
+        with open('chart.png', 'wb') as f:
+            f.write(buffer.getvalue())
+        
+        plt.close()
+        
+        esybot_set('chart_ready', True)
+    }
+    
+    if $chart_ready == true {
+        send_photo "chart.png" caption="📊 Ваш график готов!"
+    }
+}
+                
+
+                ✅ Лучшие практики
+                
+                
+                    💡 Рекомендации по использованию Python в ESYBOT:
+                    
+                        Обработка ошибок: Всегда используйте try-except блоки
+                        Производительность: Избегайте тяжёлых вычислений в обработчиках сообщений
+                        Безопасность: Проверяйте пользовательский ввод перед обработкой
+                        Логирование: Используйте print() для отладки
+                        Переменные: Используйте осмысленные имена переменных ESYBOT
+                    
+                
+
+                Пример комплексного бота
+                
+                    Копировать
+                    # Комплексный бот с Python интеграцией
+bot_token "YOUR_TOKEN"
+
+# Инициализация
+python {
+    import json
+    import sqlite3
+    import requests
+    from datetime import datetime
+    
+    # Создание базы данных
+    conn = sqlite3.connect('bot.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS analytics (
+            date TEXT,
+            users_count INTEGER,
+            messages_count INTEGER
+        )
+    ''')
+    conn.commit()
+    conn.close()
+    
+    esybot_set('bot_start_time', datetime.now().isoformat())
+    print("🤖 Бот инициализирован с Python интеграцией")
+}
+
+# Главное меню
+menu main_menu {
+    button "📊 Аналитика" analytics_btn
+    button "🌤️ Погода" weather_btn
+    button "🎲 Игра" game_btn new_row=true
+}
+
+on_start {
+    python {
+        # Аналитика при старте
+        user_id = locals().get('user_id')
+        
+        # Подключение к БД
+        conn = sqlite3.connect('bot.db')
+        cursor = conn.cursor()
+        
+        # Добавление пользователя
+        cursor.execute('''
+            INSERT OR IGNORE INTO users (user_id, first_visit)
+            VALUES (?, ?)
+        ''', (user_id, datetime.now().isoformat()))
+        
+        conn.commit()
+        conn.close()
+        
+        esybot_set('user_greeted', True)
+    }
+    
+    send "🤖 Добро пожаловать в умный бот!" keyboard=main_menu
+}
+
+on_callback analytics_btn {
+    python {
+        # Сбор аналитики
+        conn = sqlite3.connect('bot.db')
+        cursor = conn.cursor()
+        
+        # Подсчёт пользователей
+        cursor.execute('SELECT COUNT(*) FROM users')
+        users_count = cursor.fetchone()[0]
+        
+        # Подсчёт сообщений за сегодня
+        today = datetime.now().strftime('%Y-%m-%d')
+        cursor.execute('SELECT COUNT(*) FROM messages WHERE date = ?', (today,))
+        messages_today = cursor.fetchone()[0]
+        
+        conn.close()
+        
+        # Формирование отчёта
+        analytics_report = f"""
+📊 **Аналитика бота**
+
+👥 Всего пользователей: {users_count}
+💬 Сообщений сегодня: {messages_today}
+🕐 Время работы: с {esybot_get('bot_start_time')}
+
+_Данные обновляются в реальном времени_
+        """
+        
+        esybot_set('analytics_text', analytics_report.strip())
+    }
+    
+    edit $analytics_text parse_mode="Markdown"
+    answer_callback "Аналитика обновлена!"
+}
+                
+
+                
+                    🎉 Поздравляем! Теперь вы знаете, как использовать Python в ESYBOT для создания мощных и функциональных ботов!
+                
+            
+
+            
+            
+                Примеры ботов
+                
+                    Готовые примеры ботов на ESYBOT для различных задач - от простых до сложных проектов.
+                
+
+                🤖 Простой бот
+                Базовый бот с приветствием, меню и обработкой команд:
+                
+                
+                    Копировать
+                    # Простой бот на ESYBOT
+bot_token "YOUR_BOT_TOKEN"
+bot_name "SimpleBot"
+
+# Переменные
+set welcome_text "👋 Добро пожаловать в простой бот!"
+set user_count 0
+
+# Главное меню
+menu main_menu {
+    button "ℹ️ О боте" about_btn
+    button "📊 Статистика" stats_btn
+    button "🎲 Случайное число" random_btn
+}
+
+# Команды бота
+bot_commands {
+    start "Запустить бота"
+    help "Получить справку"
+    about "О боте"
+}
+
+# Обработчик команды /start
+on_start {
+    increment user_count
+    send $welcome_text
+    send "Выберите действие из меню:" keyboard=main_menu
+}
+
+# Обработчик команды /help
+on_command help {
+    send """
+📚 **Справка по боту**
+
+**Доступные команды:**
+• /start - запуск бота
+• /help - эта справка
+• /about - информация о боте
+
+**Кнопки:**
+• ℹ️ О боте - информация
+• 📊 Статистика - количество пользователей  
+• 🎲 Случайное число - генератор чисел
+    """ parse_mode="Markdown"
+}
+
+# Обработчик кнопки "О боте"
+on_callback about_btn {
+    edit """
+🤖 **О боте**
+
+Этот бот создан с помощью ESYBOT - упрощённого языка для разработки Telegram ботов.
+
+**Возможности:**
+• Простой синтаксис
+• Python интеграция
+• Поддержка aiogram 3.x
+• Быстрая разработка
+
+_Версия: 1.0_
+    """ parse_mode="Markdown"
+    answer_callback "Информация показана!"
+}
+
+# Обработчик кнопки "Статистика"
+on_callback stats_btn {
+    edit "📊 **Статистика бота**\n\n👥 Пользователей: $user_count" parse_mode="Markdown"
+    answer_callback "Статистика обновлена!"
+}
+
+# Обработчик кнопки "Случайное число"
+on_callback random_btn {
+    python {
+        import random
+        number = random.randint(1, 100)
+        esybot_set('random_number', number)
+    }
+    edit "🎲 **Случайное число**: $random_number" parse_mode="Markdown"
+    answer_callback "Новое число!"
+}
+
+# Обработка текстовых сообщений
+on_message "привет" {
+    reply "👋 Привет! Рад тебя видеть!"
+}
+
+on_message "пока" {
+    reply "👋 До свидания! Возвращайся ещё!"
+}
+                
+
+                🚀 Продвинутый бот
+                Бот с базой данных, аналитикой и внешними API:
+                
+                
+                    Копировать
+                    # Продвинутый бот с полным функционалом
+bot_token "YOUR_BOT_TOKEN"
+bot_name "AdvancedBot"
+bot_description "Продвинутый бот с множеством возможностей"
+
+# Команды для меню бота
+bot_commands {
+    start "Запустить бота"
+    profile "Мой профиль"  
+    weather "Погода"
+    news "Новости"
+    stats "Статистика"
+    admin "Админ панель"
+}
+
+# Переменные
+set admin_id 123456789
+set bot_version "2.0"
+set weather_api_key "YOUR_WEATHER_API_KEY"
+
+# Инициализация базы данных
+python {
+    import sqlite3
+    import json
+    import requests
+    from datetime import datetime, timedelta
+    import hashlib
+    
+    # Создание БД
+    conn = sqlite3.connect('advanced_bot.db')
+    cursor = conn.cursor()
+    
+    # Таблица пользователей
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            user_id INTEGER PRIMARY KEY,
+            username TEXT,
+            first_name TEXT,
+            registration_date TEXT,
+            message_count INTEGER DEFAULT 0,
+            last_activity TEXT
+        )
+    ''')
+    
+    # Таблица сообщений
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            message_text TEXT,
+            timestamp TEXT,
+            FOREIGN KEY (user_id) REFERENCES users (user_id)
+        )
+    ''')
+    
+    conn.commit()
+    conn.close()
+    
+    esybot_set('db_initialized', True)
+    print("🗄️ База данных инициализирована")
+}
+
+# Главное меню
+menu main_menu {
+    button "👤 Профиль" profile_btn
+    button "🌤️ Погода" weather_btn  
+    button "📰 Новости" news_btn new_row=true
+    button "🎮 Игры" games_btn
+    button "⚙️ Настройки" settings_btn
+}
+
+# Меню игр
+menu games_menu {
+    button "🎲 Угадай число" guess_game_btn
+    button "🎯 Викторина" quiz_btn
+    button "🎪 Шутка дня" joke_btn new_row=true
+    button "◀️ Назад" back_to_main_btn
+}
+
+# Обработчик старта с регистрацией пользователя
+on_start {
+    python {
+        user_id = locals().get('user_id')
+        update = locals().get('update')
+        
+        if update and hasattr(update, 'from_user'):
+            user = update.from_user
+            username = user.username
+            first_name = user.first_name
+            now = datetime.now().isoformat()
+            
+            # Регистрация/обновление пользователя
+            conn = sqlite3.connect('advanced_bot.db')
+            cursor = conn.cursor()
+            
+            cursor.execute('''
+                INSERT OR REPLACE INTO users 
+                (user_id, username, first_name, registration_date, last_activity)
+                VALUES (?, ?, ?, 
+                    COALESCE((SELECT registration_date FROM users WHERE user_id = ?), ?),
+                    ?)
+            ''', (user_id, username, first_name, user_id, now, now))
+            
+            # Проверяем, новый ли пользователь
+            cursor.execute('SELECT registration_date FROM users WHERE user_id = ?', (user_id,))
+            reg_date = cursor.fetchone()[0]
+            is_new_user = reg_date == now
+            
+            conn.commit()
+            conn.close()
+            
+            if is_new_user:
+                welcome_msg = f"🎉 Добро пожаловать, {first_name}!\n\nВы успешно зарегистрированы в боте."
+            else:
+                welcome_msg = f"👋 С возвращением, {first_name}!"
+            
+            esybot_set('welcome_message', welcome_msg)
+    }
+    
+    send $welcome_message
+    send "Выберите действие:" keyboard=main_menu
+}
+
+# Профиль пользователя
+on_callback profile_btn {
+    python {
+        user_id = locals().get('user_id')
+        
+        conn = sqlite3.connect('advanced_bot.db')
+        cursor = conn.cursor()
+        
+        # Получение данных пользователя
+        cursor.execute('''
+            SELECT username, first_name, registration_date, message_count
+            FROM users WHERE user_id = ?
+        ''', (user_id,))
+        
+        user_data = cursor.fetchone()
+        if user_data:
+            username, first_name, reg_date, msg_count = user_data
+            reg_date_formatted = datetime.fromisoformat(reg_date).strftime("%d.%m.%Y %H:%M")
+            
+            profile_text = f"""
+👤 **Ваш профиль**
+
+📝 **Имя:** {first_name}
+🏷️ **Username:** @{username if username else 'не указан'}
+📅 **Регистрация:** {reg_date_formatted}
+💬 **Сообщений:** {msg_count}
+🆔 **ID:** `{user_id}`
+
+_Данные обновляются автоматически_
+            """
+        else:
+            profile_text = "❌ Ошибка загрузки профиля"
+        
+        esybot_set('profile_info', profile_text.strip())
+        conn.close()
+    }
+    
+    edit $profile_info parse_mode="Markdown"
+    answer_callback "Профиль загружен!"
+}
+
+# Погода
+on_callback weather_btn {
+    python {
+        import requests
+        
+        api_key = esybot_get('weather_api_key')
+        city = "Moscow"  # Можно сделать настраиваемым
+        
+        if api_key and api_key != "YOUR_WEATHER_API_KEY":
+            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=ru"
+            
+            try:
+                response = requests.get(url)
+                data = response.json()
+                
+                if response.status_code == 200:
+                    temp = data['main']['temp']
+                    feels_like = data['main']['feels_like']
+                    description = data['weather'][0]['description']
+                    humidity = data['main']['humidity']
+                    pressure = data['main']['pressure']
+                    
+                    weather_text = f"""
+🌤️ **Погода в {city}**
+
+🌡️ **Температура:** {temp}°C (ощущается как {feels_like}°C)
+☁️ **Описание:** {description.capitalize()}
+💧 **Влажность:** {humidity}%
+📊 **Давление:** {pressure} гПа
+
+_Данные обновлены только что_
+                    """
+                else:
+                    weather_text = "❌ Не удалось получить данные о погоде"
+            except Exception as e:
+                weather_text = f"❌ Ошибка запроса: {str(e)}"
+        else:
+            weather_text = "⚙️ Для работы с погодой нужен API ключ от OpenWeatherMap"
+        
+        esybot_set('weather_info', weather_text.strip())
+    }
+    
+    edit $weather_info parse_mode="Markdown"
+    answer_callback "Погода обновлена!"
+}
+
+# Игры
+on_callback games_btn {
+    edit "🎮 **Игровая зона**\n\nВыберите игру:" parse_mode="Markdown" keyboard=games_menu
+    answer_callback "Игры загружены!"
+}
+
+# Игра "Угадай число"
+on_callback guess_game_btn {
+    python {
+        import random
+        secret_number = random.randint(1, 100)
+        esybot_set('secret_number', secret_number)
+        esybot_set('attempts', 0)
+        esybot_set('max_attempts', 7)
+        
+        game_text = f"""
+🎲 **Игра "Угадай число"**
+
+Я загадал число от 1 до 100.
+У вас есть {esybot_get('max_attempts')} попыток!
+
+Напишите ваше предположение:
+        """
+        esybot_set('game_message', game_text.strip())
+    }
+    
+    edit $game_message parse_mode="Markdown"
+    set_state guessing_game
+    answer_callback "Игра началась!"
+}
+
+# Обработка игры "Угадай число"
+on_message {
+    if $state == "guessing_game" {
+        python {
+            user_guess = locals().get('text', '').strip()
+            
+            try:
+                guess = int(user_guess)
+                secret = esybot_get('secret_number')
+                attempts = esybot_get('attempts', 0) + 1
+                max_attempts = esybot_get('max_attempts', 7)
+                
+                esybot_set('attempts', attempts)
+                
+                if guess == secret:
+                    result_msg = f"🎉 Поздравляю! Вы угадали число {secret} за {attempts} попыток!"
+                    esybot_set('game_over', True)
+                elif attempts >= max_attempts:
+                    result_msg = f"😔 Попытки закончились! Загаданное число было {secret}"
+                    esybot_set('game_over', True)
+                elif guess  ?', (yesterday,))
+            active_users = cursor.fetchone()[0]
+            
+            admin_stats = f"""
+👑 **АДМИН ПАНЕЛЬ**
+
+📊 **Общая статистика:**
+👥 Всего пользователей: {total_users}
+💬 Всего сообщений: {total_messages}
+🟢 Активных за 24ч: {active_users}
+
+🤖 **Информация о боте:**
+📦 Версия: {esybot_get('bot_version')}
+🗄️ БД: {'✅ Подключена' if esybot_get('db_initialized') else '❌ Ошибка'}
+
+_Обновлено: {datetime.now().strftime('%d.%m.%Y %H:%M')}_
+            """
+            
+            esybot_set('admin_panel', admin_stats.strip())
+            conn.close()
+        }
+        
+        send $admin_panel parse_mode="Markdown"
+    }
+    
+    if $user_id != $admin_id {
+        send "❌ У вас нет прав для доступа к админ панели"
+    }
+}
+
+# Логирование всех сообщений
+on_message {
+    python {
+        user_id = locals().get('user_id')
+        message_text = locals().get('text', '')
+        now = datetime.now().isoformat()
+        
+        if message_text:  # Только текстовые сообщения
+            conn = sqlite3.connect('advanced_bot.db')
+            cursor = conn.cursor()
+            
+            # Сохранение сообщения
+            cursor.execute('''
+                INSERT INTO messages (user_id, message_text, timestamp)
+                VALUES (?, ?, ?)
+            ''', (user_id, message_text, now))
+            
+            # Обновление счётчика сообщений пользователя
+            cursor.execute('''
+                UPDATE users SET message_count = message_count + 1, last_activity = ?
+                WHERE user_id = ?
+            ''', (now, user_id))
+            
+            conn.commit()
+            conn.close()
+    }
+}
+                
+
+                🛍️ Бот интернет-магазина
+                Пример бота для электронной коммерции с каталогом товаров:
+                
+                
+                    Копировать
+                    # Бот интернет-магазина
+bot_token "YOUR_BOT_TOKEN"
+bot_name "ShopBot"
+
+# Инициализация товаров
+python {
+    # Каталог товаров
+    products = {
+        "laptop": {
+            "name": "💻 Ноутбук Gaming Pro",
+            "price": 85000,
+            "description": "Мощный игровой ноутбук с RTX 4060",
+            "image": "https://example.com/laptop.jpg",
+            "stock": 5
+        },
+        "phone": {
+            "name": "📱 Смартфон Ultra",
+            "price": 45000,
+            "description": "Флагманский смартфон с отличной камерой",
+            "image": "https://example.com/phone.jpg", 
+            "stock": 12
+        },
+        "headphones": {
+            "name": "🎧 Наушники Premium",
+            "price": 15000,
+            "description": "Беспроводные наушники с шумоподавлением",
+            "image": "https://example.com/headphones.jpg",
+            "stock": 20
+        }
+    }
+    
+    esybot_set('products', products)
+    esybot_set('cart', {})  # Корзина пользователя
+}
+
+# Главное меню магазина
+menu shop_menu {
+    button "🛍️ Каталог" catalog_btn
+    button "🛒 Корзина" cart_btn
+    button "📞 Поддержка" support_btn new_row=true
+    button "ℹ️ О магазине" about_shop_btn
+}
+
+# Меню каталога
+menu catalog_menu {
+    button "💻 Ноутбуки" laptops_btn
+    button "📱 Смартфоны" phones_btn
+    button "🎧 Наушники" headphones_btn new_row=true
+    button "◀️ Назад" back_to_shop_btn
+}
+
+on_start {
+    send """
+🛍️ **Добро пожаловать в наш интернет-магазин!**
+
+Здесь вы найдёте качественную электронику по выгодным ценам.
+
+Выберите раздел для начала покупок:
+    """ parse_mode="Markdown" keyboard=shop_menu
+}
+
+# Показ каталога
+on_callback catalog_btn {
+    edit """
+📦 **Каталог товаров**
+
+Выберите категорию:
+• 💻 Ноутбуки - мощные устройства для работы и игр
+• 📱 Смартфоны - современные флагманы
+• 🎧 Наушники - качественный звук
+
+_Все товары в наличии!_
+    """ parse_mode="Markdown" keyboard=catalog_menu
+    answer_callback "Каталог загружен!"
+}
+
+# Показ конкретного товара
+on_callback laptops_btn {
+    python {
+        products = esybot_get('products')
+        laptop = products['laptop']
+        
+        product_text = f"""
+{laptop['name']}
+
+💰 **Цена:** {laptop['price']:,} ₽
+📝 **Описание:** {laptop['description']}
+📦 **В наличии:** {laptop['stock']} шт.
+
+_Для заказа нажмите кнопку "В корзину"_
+        """
+        esybot_set('current_product', 'laptop')
+        esybot_set('product_info', product_text.strip())
+    }
+    
+    # Меню товара
+    menu product_menu {
+        button "🛒 В корзину" add_to_cart_btn
+        button "📋 Подробнее" details_btn
+        button "◀️ К каталогу" back_to_catalog_btn
+    }
+    
+    edit $product_info parse_mode="Markdown" keyboard=product_menu
+    answer_callback "Товар загружен!"
+}
+
+# Добавление в корзину
+on_callback add_to_cart_btn {
+    python {
+                current_product = esybot_get('current_product')
+        products = esybot_get('products')
+        cart = esybot_get('cart', {})
+        user_id = str(locals().get('user_id', 'unknown'))
+        
+        if current_product and current_product in products:
+            product = products[current_product]
+            
+            # Инициализация корзины пользователя
+            if user_id not in cart:
+                cart[user_id] = {}
+            
+            # Добавление товара в корзину
+            if current_product in cart[user_id]:
+                cart[user_id][current_product] += 1
+            else:
+                cart[user_id][current_product] = 1
+            
+            esybot_set('cart', cart)
+            
+            # Подсчёт общей стоимости корзины
+            total = 0
+            items_count = 0
+            for item_id, quantity in cart[user_id].items():
+                if item_id in products:
+                    total += products[item_id]['price'] * quantity
+                    items_count += quantity
+            
+            esybot_set('cart_total', total)
+            esybot_set('cart_items', items_count)
+            
+            success_msg = f"✅ {product['name']} добавлен в корзину!\n\n🛒 В корзине: {items_count} товаров\n💰 Сумма: {total:,} ₽"
+            esybot_set('add_success', success_msg)
+    }
+    
+    edit $add_success parse_mode="Markdown"
+    answer_callback "Товар добавлен!"
+}
+
+# Показ корзины
+on_callback cart_btn {
+    python {
+        cart = esybot_get('cart', {})
+        products = esybot_get('products')
+        user_id = str(locals().get('user_id', 'unknown'))
+        
+        if user_id in cart and cart[user_id]:
+            cart_text = "🛒 **Ваша корзина:**\n\n"
+            total = 0
+            
+            for item_id, quantity in cart[user_id].items():
+                if item_id in products:
+                    product = products[item_id]
+                    subtotal = product['price'] * quantity
+                    total += subtotal
+                    cart_text += f"• {product['name']}\n"
+                    cart_text += f"  Количество: {quantity} шт.\n"
+                    cart_text += f"  Стоимость: {subtotal:,} ₽\n\n"
+            
+            cart_text += f"💰 **Итого: {total:,} ₽**"
+            esybot_set('cart_display', cart_text)
+            esybot_set('has_items', True)
+        else:
+            esybot_set('cart_display', "🛒 **Корзина пуста**\n\nДобавьте товары из каталога!")
+            esybot_set('has_items', False)
+    }
+    
+    # Меню корзины
+    menu cart_menu {
+        button "💳 Оформить заказ" checkout_btn
+        button "🗑️ Очистить корзину" clear_cart_btn  
+        button "◀️ Продолжить покупки" back_to_shop_btn
+    }
+    
+    if $has_items == true {
+        edit $cart_display parse_mode="Markdown" keyboard=cart_menu
+    }
+    if $has_items == false {
+        edit $cart_display parse_mode="Markdown" keyboard=shop_menu
+    }
+    
+    answer_callback "Корзина загружена!"
+}
+
+# Оформление заказа
+on_callback checkout_btn {
+    edit """
+💳 **Оформление заказа**
+
+Для завершения покупки:
+1️⃣ Укажите ваши контактные данные
+2️⃣ Выберите способ доставки
+3️⃣ Подтвердите заказ
+
+Напишите ваше имя и телефон в формате:
+`Иван Петров, +7 900 123 45 67`
+    """ parse_mode="Markdown"
+    
+    set_state waiting_contact_info
+    answer_callback "Оформление заказа"
+}
+
+# Обработка контактной информации
+on_message {
+    if $state == "waiting_contact_info" {
+        python {
+            contact_info = locals().get('text', '').strip()
+            esybot_set('customer_info', contact_info)
+            
+            # Генерация номера заказа
+            import random
+            order_number = f"ESY{random.randint(10000, 99999)}"
+            esybot_set('order_number', order_number)
+            
+            # Расчёт итоговой стоимости
+            cart = esybot_get('cart', {})
+            products = esybot_get('products')
+            user_id = str(locals().get('user_id', 'unknown'))
+            
+            total = 0
+            if user_id in cart:
+                for item_id, quantity in cart[user_id].items():
+                    if item_id in products:
+                        total += products[item_id]['price'] * quantity
+            
+            confirmation_text = f"""
+✅ **Заказ оформлен!**
+
+📋 **Номер заказа:** {order_number}
+👤 **Покупатель:** {contact_info}
+💰 **Сумма:** {total:,} ₽
+
+📦 **Доставка:** 2-3 рабочих дня
+💳 **Оплата:** При получении
+
+Спасибо за покупку! Наш менеджер свяжется с вами в течение часа.
+            """
+            
+            esybot_set('order_confirmation', confirmation_text.strip())
+            
+            # Очистка корзины после заказа
+            if user_id in cart:
+                del cart[user_id]
+                esybot_set('cart', cart)
+        }
+        
+        reply $order_confirmation parse_mode="Markdown"
+        send "Вернуться в магазин:" keyboard=shop_menu
+        clear_state
+    }
+}</code></pre>
+                </div>
+
+                <h2 data-lang="examples.survey_bot">📊 Бот-опросник</h2>
+                <p>Интерактивный бот для проведения опросов и анкетирования:</p>
+                
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Бот для опросов и анкетирования
+bot_token "YOUR_BOT_TOKEN"
+bot_name "SurveyBot"
+
+# Переменные опроса
+set current_question 0
+set total_questions 5
+
+# Вопросы опроса
+python {
+    survey_questions = [
+        {
+            "question": "Как вас зовут?",
+            "type": "text",
+            "field": "name"
+        },
+        {
+            "question": "Сколько вам лет?",
+            "type": "number",
+            "field": "age"
+        },
+        {
+            "question": "Какой ваш любимый цвет?",
+            "type": "choice",
+            "field": "color",
+            "options": ["🔴 Красный", "🔵 Синий", "🟢 Зелёный", "🟡 Жёлтый"]
+        },
+        {
+            "question": "Оцените наш сервис от 1 до 5",
+            "type": "rating",
+            "field": "rating"
+        },
+        {
+            "question": "Дополнительные комментарии:",
+            "type": "text",
+            "field": "comments"
+        }
+    ]
+    
+    esybot_set('survey_questions', survey_questions)
+    esybot_set('survey_data', {})
+}
+
+# Главное меню
+menu main_survey_menu {
+    button "📝 Начать опрос" start_survey_btn
+    button "📊 Статистика" survey_stats_btn
+    button "ℹ️ О опросе" survey_info_btn
+}
+
+on_start {
+    send """
+📋 **Добро пожаловать в опрос!**
+
+Помогите нам стать лучше, ответив на несколько вопросов.
+Опрос займёт не более 3 минут.
+
+🎁 **За участие:** скидка 10% на наши услуги!
+    """ parse_mode="Markdown" keyboard=main_survey_menu
+}
+
+# Начало опроса
+on_callback start_survey_btn {
+    set current_question 0
+    python {
+        questions = esybot_get('survey_questions')
+        current_q = esybot_get('current_question', 0)
+        
+        if current_q < len(questions):
+            question_data = questions[current_q]
+            question_text = f"""
+📝 **Опрос ({current_q + 1}/{len(questions)})**
+
+{question_data['question']}
+            """
+            
+            esybot_set('current_question_text', question_text.strip())
+            esybot_set('current_question_type', question_data['type'])
+            esybot_set('current_question_field', question_data['field'])
+            
+            # Создание клавиатуры для вопросов с вариантами
+            if question_data['type'] == 'choice':
+                esybot_set('question_options', question_data.get('options', []))
+            else:
+                esybot_set('question_options', [])
+    }
+    
+    # Динамическая клавиатура для вопроса с выбором
+    if $current_question_type == "choice" {
+        python {
+            options = esybot_get('question_options', [])
+            # Здесь нужно создать меню динамически
+            # Для простоты используем обработку текста
+        }
+        edit $current_question_text parse_mode="Markdown"
+        send "Выберите один из вариантов:"
+        python {
+            options = esybot_get('question_options', [])
+            for i, option in enumerate(options):
+                esybot_set(f'option_{i}', option)
+        }
+    }
+    
+    if $current_question_type != "choice" {
+        edit $current_question_text parse_mode="Markdown"
+    }
+    
+    set_state survey_in_progress
+    answer_callback "Опрос начат!"
+}
+
+# Обработка ответов на вопросы
+on_message {
+    if $state == "survey_in_progress" {
+        python {
+            user_answer = locals().get('text', '').strip()
+            current_q = esybot_get('current_question', 0)
+            questions = esybot_get('survey_questions')
+            survey_data = esybot_get('survey_data', {})
+            user_id = str(locals().get('user_id', 'unknown'))
+            
+            if user_id not in survey_data:
+                survey_data[user_id] = {}
+            
+            # Валидация ответа
+            is_valid = True
+            error_msg = ""
+            
+            if current_q < len(questions):
+                question = questions[current_q]
+                field = question['field']
+                q_type = question['type']
+                
+                if q_type == 'number':
+                    try:
+                        answer_value = int(user_answer)
+                        if answer_value < 0:
+                            is_valid = False
+                            error_msg = "❌ Введите положительное число"
+                    except ValueError:
+                        is_valid = False
+                        error_msg = "❌ Введите корректное число"
+                        answer_value = user_answer
+                elif q_type == 'rating':
+                    try:
+                        answer_value = int(user_answer)
+                        if answer_value < 1 or answer_value > 5:
+                            is_valid = False
+                            error_msg = "❌ Введите число от 1 до 5"
+                    except ValueError:
+                        is_valid = False
+                        error_msg = "❌ Введите число от 1 до 5"
+                        answer_value = user_answer
+                else:
+                    answer_value = user_answer
+                    if len(answer_value) < 1:
+                        is_valid = False
+                        error_msg = "❌ Ответ не может быть пустым"
+                
+                if is_valid:
+                    # Сохранение ответа
+                    survey_data[user_id][field] = answer_value
+                    esybot_set('survey_data', survey_data)
+                    
+                    # Переход к следующему вопросу
+                    next_q = current_q + 1
+                    esybot_set('current_question', next_q)
+                    
+                    if next_q < len(questions):
+                        # Показ следующего вопроса
+                        next_question = questions[next_q]
+                        question_text = f"""
+📝 **Опрос ({next_q + 1}/{len(questions)})**
+
+{next_question['question']}
+                        """
+                        esybot_set('next_question_text', question_text.strip())
+                        esybot_set('survey_continues', True)
+                    else:
+                        # Опрос завершён
+                        esybot_set('survey_continues', False)
+                        
+                        # Формирование результата
+                        result_text = f"""
+🎉 **Спасибо за участие в опросе!**
+
+📋 **Ваши ответы:**
+👤 Имя: {survey_data[user_id].get('name', 'Не указано')}
+🎂 Возраст: {survey_data[user_id].get('age', 'Не указано')}
+🎨 Цвет: {survey_data[user_id].get('color', 'Не указано')}
+⭐ Оценка: {survey_data[user_id].get('rating', 'Не указано')}/5
+💬 Комментарий: {survey_data[user_id].get('comments', 'Нет')}
+
+🎁 **Ваш промокод на скидку 10%:** SURVEY2024
+                        """
+                        esybot_set('survey_result', result_text.strip())
+                else:
+                    esybot_set('validation_error', error_msg)
+                    esybot_set('survey_continues', True)
+        }
+        
+        if $validation_error {
+            reply $validation_error
+            send "Попробуйте ещё раз:"
+        }
+        
+        if $survey_continues == true and not $validation_error {
+            reply "✅ Ответ принят!"
+            send $next_question_text parse_mode="Markdown"
+        }
+        
+        if $survey_continues == false {
+            reply $survey_result parse_mode="Markdown"
+            send "Спасибо за участие!" keyboard=main_survey_menu
+            clear_state
+        }
+        
+        # Очистка временных переменных
+        set validation_error ""
+    }
+}</code></pre>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>🎯 Итоги раздела с примерами:</strong><br>
+                    Эти примеры показывают возможности ESYBOT от простых ботов до сложных бизнес-решений. Используйте их как основу для своих проектов!
+                </div>
+            </div>
+
+            <!-- API справочник -->
+            <div class="page" id="api">
+                <h1 data-lang="api.title">API справочник</h1>
+                <p class="lead" data-lang="api.description">
+                    Техническая документация по всем функциям, методам и внутреннему устройству интерпретатора ESYBOT.
+                </p>
+
+                <h2 data-lang="api.interpreter">🔧 Интерпретатор</h2>
+                
+                <h3>Класс ESYBOTInterpreter</h3>
+                <p>Основной класс интерпретатора ESYBOT:</p>
+                
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-python">class ESYBOTInterpreter:
+    """Интерпретатор языка ESYBOT"""
+    
+    def __init__(self):
+        self.bot: Optional[Bot] = None
+        self.dp: Optional[Dispatcher] = None
+        self.token: str = ""
+        self.commands: List[ESYBOTCommand] = []
+        self.variables: Dict[str, Any] = {}
+        self.python_globals: Dict[str, Any] = {}
+        
+    def parse_file(self, filename: str) -> bool:
+        """Парсинг файла ESYBOT"""
+        
+    async def run(self) -> None:
+        """Запуск интерпретатора и бота"""</code></pre>
+                </div>
+
+                <h3>Основные методы</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Метод</th>
+                                <th>Описание</th>
+                                <th>Параметры</th>
+                                <th>Возвращает</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>parse_file(filename)</code></td>
+                                <td>Парсит файл ESYBOT</td>
+                                <td><code>filename: str</code></td>
+                                <td><code>bool</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>run()</code></td>
+                                <td>Запускает бота</td>
+                                <td>Нет</td>
+                                <td><code>None</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>_resolve_variables(text, context)</code></td>
+                                <td>Разрешает переменные в тексте</td>
+                                <td><code>text: str, context: dict</code></td>
+                                <td><code>str</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>_execute_command(cmd)</code></td>
+                                <td>Выполняет команду ESYBOT</td>
+                                <td><code>cmd: ESYBOTCommand</code></td>
+                                <td><code>None</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 data-lang="api.commands">📜 Структура команд</h2>
+                
+                <h3>Класс ESYBOTCommand</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-python">@dataclass
+class ESYBOTCommand:
+    """Команда языка ESYBOT"""
+    type: CommandType
+    name: str
+    args: List[str]
+    kwargs: Dict[str, Any] = field(default_factory=dict)
+    line_number: int = 0
+    raw_line: str = ""
+    block_content: List['ESYBOTCommand'] = field(default_factory=list)
+    python_code: str = ""</code></pre>
+                </div>
+
+                <h3>Типы команд (CommandType)</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип</th>
+                                <th>Описание</th>
+                                <th>Примеры команд</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>BOT_CONFIG</code></td>
+                                <td>Конфигурация бота</td>
+                                <td>bot_token, bot_name</td>
+                            </tr>
+                            <tr>
+                                <td><code>HANDLER</code></td>
+                                <td>Обработчики событий</td>
+                                <td>on_start, on_message</td>
+                            </tr>
+                            <tr>
+                                <td><code>RESPONSE</code></td>
+                                <td>Ответы и действия</td>
+                                <td>send, reply, edit</td>
+                            </tr>
+                            <tr>
+                                <td><code>VARIABLE</code></td>
+                                <td>Работа с переменными</td>
+                                <td>set, get, increment</td>
+                            </tr>
+                            <tr>
+                                <td><code>PYTHON_CODE</code></td>
+                                <td>Python блоки</td>
+                                <td>python</td>
+                            </tr>
+                            <tr>
+                                <td><code>CONDITION</code></td>
+                                <td>Условные конструкции</td>
+                                <td>if, else</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 data-lang="api.contexts">🔄 Контексты выполнения</h2>
+                <p>Каждая команда выполняется в определённом контексте:</p>
+                
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-python"># Пример контекста сообщения
+context = {
+    'update': update,           # Объект обновления Telegram
+    'state': state,            # FSM состояние
+    'bot': self.bot,           # Экземпляр бота
+    'user_id': update.from_user.id,
+    'chat_id': update.chat.id,
+    'text': update.text or '',
+    'photo': update.photo or [],
+    'message': update,
+    # ... другие поля
+}</code></pre>
+                </div>
+
+                <h3>Системные переменные контекста</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Переменная</th>
+                                <th>Тип</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>$user_id</code></td>
+                                <td>int</td>
+                                <td>ID пользователя Telegram</td>
+                            </tr>
+                            <tr>
+                                <td><code>$chat_id</code></td>
+                                <td>int</td>
+                                <td>ID чата</td>
+                            </tr>
+                            <tr>
+                                <td><code>$text</code></td>
+                                <td>str</td>
+                                <td>Текст сообщения</td>
+                            </tr>
+                            <tr>
+                                <td><code>$first_name</code></td>
+                                <td>str</td>
+                                <td>Имя пользователя</td>
+                            </tr>
+                            <tr>
+                                <td><code>$username</code></td>
+                                <td>str</td>
+                                <td>Username с @</td>
+                            </tr>
+                            <tr>
+                                <td><code>$data</code></td>
+                                <td>str</td>
+                                <td>Данные callback кнопки</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 data-lang="api.extensions">🔌 Расширения</h2>
+                <p>ESYBOT поддерживает расширения через Python модули:</p>
+                
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-python"># Пример расширения ESYBOT
+class CustomExtension:
+    """Пользовательское расширение"""
+    
+    def __init__(self, interpreter):
+        self.interpreter = interpreter
+        self.register_commands()
+    
+    def register_commands(self):
+        """Регистрация новых команд"""
+        self.interpreter.register_command('my_command', self.handle_my_command)
+    
+    async def handle_my_command(self, cmd, context):
+        """Обработчик пользовательской команды"""
+        # Ваша логика здесь
+        pass
+
+# Использование расширения
+interpreter = ESYBOTInterpreter()
+extension = CustomExtension(interpreter)</code></pre>
+                </div>
+
+                <h3>Создание собственных команд</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-python"># Добавление новой команды в интерпретатор
+def add_custom_command(self, command_name: str, handler: Callable):
+    """Добавление пользовательской команды"""
+    self.custom_commands[command_name] = handler
+
+# Пример использования
+async def handle_weather_command(cmd, context):
+    # Получение погоды через API
+    weather_data = await get_weather_api()
+    return weather_data
+
+interpreter.add_custom_command('get_weather', handle_weather_command)</code></pre>
+                </div>
+
+                <h2 data-lang="api.debugging">🐛 Отладка и логирование</h2>
+                
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Включение отладочного режима
+python {
+    import logging
+    
+    # Настройка логирования
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    
+    logger = logging.getLogger('ESYBOT')
+    logger.info('Отладочный режим включён')
+    
+    # Функция для отладки переменных
+    def debug_vars():
+        vars_info = "🔍 Переменные ESYBOT:\n"
+        for name, value in esybot_vars.items():
+            vars_info += f"• {name} = {value}\n"
+        print(vars_info)
+    
+    # Вызов функции отладки
+    debug_vars()
+}</code></pre>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>💡 Совет для разработчиков:</strong> Используйте <code>print()</code> в Python блоках для отладки - вывод появится в консоли при запуске бота.
+                </div>
+
+                <h3>Обработка ошибок</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-python"># Встроенная обработка ошибок в интерпретаторе
+async def _execute_command(self, cmd: ESYBOTCommand) -> None:
+    """Выполнение команды с обработкой ошибок"""
+    try:
+        # Выполнение команды
+        await self._handle_command(cmd)
+    except Exception as e:
+        error_msg = f"❌ Ошибка в команде '{cmd.name}' (строка {cmd.line_number}): {e}"
+        print(error_msg)
+        
+        # Логирование полной информации об ошибке
+        import traceback
+        traceback.print_exc()
+        
+        # Уведомление администратора (если настроено)
+        if hasattr(self, 'admin_chat_id'):
+            await self.bot.send_message(
+                chat_id=self.admin_chat_id,
+                text=f"⚠️ Ошибка в боте:\n{error_msg}"
+            )</code></pre>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>🎓 Заключение:</strong> Этот API справочник поможет вам глубже понять внутреннее устройство ESYBOT и создавать более сложные решения. Удачи в разработке!
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Состояние приложения
+        let currentLanguage = 'ru';
+        let currentPage = 'home';
+        
+        // Переводы
+        const translations = {
+            ru: {
+                "nav.home": "Главная",
+                "nav.getting_started": "Начало работы", 
+                "nav.documentation": "Документация",
+                "nav.syntax": "Синтаксис",
+                "nav.commands": "Команды",
+                "nav.python_integration": "Python интеграция",
+                "nav.examples": "Примеры",
+                "nav.reference": "Справочник",
+                "nav.api": "API",
+                "home.hero_subtitle": "Революционный язык для создания Telegram ботов",
+                "home.hero_description": "ESYBOT упрощает создание мощных Telegram ботов с интеграцией Python, поддержкой всех возможностей aiogram и интуитивным синтаксисом.",
+                "home.quick_start": "🚀 Быстрый старт",
+                "home.view_examples": "📚 Примеры",
+                "home.features.title": "Возможности ESYBOT",
+                "home.features.simple_syntax.title": "Простой синтаксис",
+                "home.features.simple_syntax.description": "Интуитивные команды для быстрого создания ботов без изучения сложного API",
+                "home.features.python_integration.title": "Python интеграция",
+                "home.features.python_integration.description": "Полная поддержка Python кода внутри ESYBOT с обменом переменными",
+                "home.features.aiogram_support.title": "Поддержка aiogram",
+                "home.features.aiogram_support.description": "Все возможности aiogram 3.x доступны из коробки",
+                "home.features.extensible.title": "Расширяемость",
+                "home.features.extensible.description": "Легко добавляйте новые функции и интегрируйте с внешними сервисами",
+                "home.quick_example.title": "Быстрый пример",
+                "home.quick_example.description": "Создайте своего первого бота за несколько минут:",
+                "getting_started.title": "Начало работы с ESYBOT",
+                "getting_started.description": "Пошаговое руководство по установке и настройке ESYBOT для создания вашего первого Telegram бота.",
+                "syntax.title": "Синтаксис ESYBOT",
+                "syntax.description": "Полное описание синтаксиса и структуры языка ESYBOT с примерами использования.",
+                "commands.title": "Справочник команд",
+                "commands.description": "Полный список всех команд ESYBOT с описанием, параметрами и примерами использования.",
+                "python_integration.title": "Python интеграция",
+                "python_integration.description": "Полное руководство по использованию Python кода внутри ESYBOT скриптов для создания мощных и гибких ботов.",
+                "examples.title": "Примеры ботов",
+                "examples.description": "Готовые примеры ботов на ESYBOT для различных задач - от простых до сложных проектов.",
+                "api.title": "API справочник",
+                "api.description": "Техническая документация по всем функциям, методам и внутреннему устройству интерпретатора ESYBOT."
+            },
+            en: {
+                "nav.home": "Home",
+                "nav.getting_started": "Getting Started",
+                "nav.documentation": "Documentation", 
+                "nav.syntax": "Syntax",
+                "nav.commands": "Commands",
+                "nav.python_integration": "Python Integration",
+                "nav.examples": "Examples",
+                "nav.reference": "Reference",
+                "nav.api": "API",
+                "home.hero_subtitle": "Revolutionary Language for Telegram Bot Development",
+                "home.hero_description": "ESYBOT simplifies creating powerful Telegram bots with Python integration, full aiogram support, and intuitive syntax.",
+                "home.quick_start": "🚀 Quick Start",
+                "home.view_examples": "📚 Examples",
+                "home.features.title": "ESYBOT Features",
+                "home.features.simple_syntax.title": "Simple Syntax",
+                "home.features.simple_syntax.description": "Intuitive commands for rapid bot development without learning complex APIs",
+                "home.features.python_integration.title": "Python Integration",
+                "home.features.python_integration.description": "Full Python code support within ESYBOT with variable sharing",
+                "home.features.aiogram_support.title": "aiogram Support",
+                "home.features.aiogram_support.description": "All aiogram 3.x features available out of the box",
+                "home.features.extensible.title": "Extensible",
+                "home.features.extensible.description": "Easily add new features and integrate with external services",
+                "home.quick_example.title": "Quick Example",
+                "home.quick_example.description": "Create your first bot in minutes:",
+                "getting_started.title": "Getting Started with ESYBOT",
+                "getting_started.description": "Step-by-step guide to installing and setting up ESYBOT to create your first Telegram bot.",
+                "syntax.title": "ESYBOT Syntax",
+                "syntax.description": "Complete description of ESYBOT language syntax and structure with usage examples.",
+                "commands.title": "Commands Reference", 
+                "commands.description": "Complete list of all ESYBOT commands with descriptions, parameters, and usage examples.",
+                "python_integration.title": "Python Integration",
+                "python_integration.description": "Complete guide to using Python code within ESYBOT scripts for creating powerful and flexible bots.",
+                "examples.title": "Bot Examples",
+                "examples.description": "Ready-to-use ESYBOT bot examples for various tasks - from simple to complex projects.",
+                "api.title": "API Reference",
+                "api.description": "Technical documentation for all ESYBOT interpreter functions, methods, and internal architecture."
+            }
+        };
+        
+        // Функция перевода
+        function translate(key) {
+            return translations[currentLanguage][key] || key;
+        }
+        
+        // Обновление переводов на странице
+        function updateTranslations() {
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                element.textContent = translate(key);
+            });
+        }
+        
+        // Смена языка
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            
+            // Обновление кнопок языка
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('lang' + lang.charAt(0).toUpperCase() + lang.slice(1)).classList.add('active');
+            
+            // Обновление переводов
+            updateTranslations();
+            
+            // Сохранение в localStorage
+            localStorage.setItem('esybot-lang', lang);
+        }
+        
+        // Показ страницы
+        function showPage(pageId) {
+            // Скрытие всех страниц
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Показ выбранной страницы
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                currentPage = pageId;
+            }
+            
+            // Обновление активного пункта меню
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Подсветка синтаксиса для новой страницы
+            setTimeout(() => {
+                if (typeof hljs !== 'undefined') {
+                    hljs.highlightAll();
+                }
+            }, 100);
+        }
+        
+        // Переключение боковой панели
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main');
+            
+            sidebar.classList.toggle('open');
+            main.classList.toggle('expanded');
+        }
+        
+        // Копирование кода
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Скопировано!';
+                button.style.background = 'var(--accent)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                }, 2000);
+            });
+        }
+        
+        // Поиск
+        function initSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                // Здесь можно реализовать поиск по документации
+                console.log('Поиск:', query);
+            });
+        }
+        
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            // Восстановление языка из localStorage
+            const savedLang = localStorage.getItem('esybot-lang') || 'ru';
+            setLanguage(savedLang);
+            
+            // Инициализация поиска
+            initSearch();
+            
+            // Подсветка синтаксиса
+            if (typeof hljs !== 'undefined') {
+                hljs.highlightAll();
+            }
+            
+            // Закрытие мобильного меню при клике вне его
+            document.addEventListener('click', (e) => {
+                const sidebar = document.getElementById('sidebar');
+                const menuBtn = document.querySelector('.mobile-menu-btn');
+                
+                if (window.innerWidth <= 768 && 
+                    !sidebar.contains(e.target) && 
+                    !menuBtn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+        
+        // Обработка изменения размера окна
+        window.addEventListener('resize', () => {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main');
+            
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+                main.classList.remove('expanded');
+            }
+        });
+    </script>
+</body>
+</html>
