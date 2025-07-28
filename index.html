@@ -1,20 +1,17 @@
-Отличная идея! Создам полную документацию для **ESYBOT** в одном HTML файле в стиле ALT KDE Wiki с поддержкой русского и английского языков:
-
-```html
-
-
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESYBOT Documentation</title>
+    <meta name="description" content="Полная документация по ESYBOT - упрощённому языку для создания Telegram ботов">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
     
+    <!-- Highlight.js для подсветки кода -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     
-    ESYBOT Documentation
-    
-    🤖">
-    
-    
-    
-    
-    
-    
+    <style>
         :root {
             --primary-color: #3b82f6;
             --primary-dark: #1e40af;
@@ -597,104 +594,104 @@
             background: var(--border);
             color: var(--text-primary);
         }
-    
+    </style>
+</head>
+<body>
+    <!-- Заголовок -->
+    <header class="header">
+        <div class="header-content">
+            <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Меню">☰</button>
+            <a href="#" class="logo" onclick="showPage('home')">
+                <span class="logo-icon">🤖</span>
+                <span>ESYBOT</span>
+            </a>
+            <div class="header-controls">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Поиск в документации..." id="searchInput">
+                </div>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="setLanguage('ru')" id="langRu">RU</button>
+                    <button class="lang-btn" onclick="setLanguage('en')" id="langEn">EN</button>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <!-- Боковая панель -->
+    <nav class="sidebar" id="sidebar">
+        <div class="nav-section">
+            <div class="nav-title" data-lang="nav.getting_started">Начало работы</div>
+            <a class="nav-item active" onclick="showPage('home')" data-lang="nav.home">Главная</a>
+            <a class="nav-item" onclick="showPage('getting-started')" data-lang="nav.getting_started">Начало работы</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title" data-lang="nav.documentation">Документация</div>
+            <a class="nav-item" onclick="showPage('syntax')" data-lang="nav.syntax">Синтаксис</a>
+            <a class="nav-item" onclick="showPage('commands')" data-lang="nav.commands">Команды</a>
+            <a class="nav-item" onclick="showPage('python-integration')" data-lang="nav.python_integration">Python интеграция</a>
+            <a class="nav-item" onclick="showPage('examples')" data-lang="nav.examples">Примеры</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title" data-lang="nav.reference">Справочник</div>
+            <a class="nav-item" onclick="showPage('api')" data-lang="nav.api">API</a>
+        </div>
+    </nav>
 
-    
-    
-        
-            ☰
-            
-                🤖
-                ESYBOT
-            
-            
-                
-                    
-                
-                
-                    RU
-                    EN
-                
-            
-        
-    
-
-    
-    
-        
-            Начало работы
-            Главная
-            Начало работы
-        
-        
-            Документация
-            Синтаксис
-            Команды
-            Python интеграция
-            Примеры
-        
-        
-            Справочник
-            API
-        
-    
-
-    
-    
-        
-            
-            
-                
-                    ESYBOT
-                    Революционный язык для создания Telegram ботов
-                    
+    <!-- Основной контент -->
+    <main class="main" id="main">
+        <div class="content">
+            <!-- Главная страница -->
+            <div class="page active" id="home">
+                <div class="hero">
+                    <h1 class="hero-title">ESYBOT</h1>
+                    <p class="hero-subtitle" data-lang="home.hero_subtitle">Революционный язык для создания Telegram ботов</p>
+                    <p class="hero-description" data-lang="home.hero_description">
                         ESYBOT упрощает создание мощных Telegram ботов с интеграцией Python, поддержкой всех возможностей aiogram и интуитивным синтаксисом.
-                    
-                    
-                        🚀 Быстрый старт
-                        📚 Примеры
-                    
-                
+                    </p>
+                    <div class="hero-buttons">
+                        <a class="btn btn-primary" onclick="showPage('getting-started')" data-lang="home.quick_start">🚀 Быстрый старт</a>
+                        <a class="btn btn-secondary" onclick="showPage('examples')" data-lang="home.view_examples">📚 Примеры</a>
+                    </div>
+                </div>
 
-                Возможности ESYBOT
-                
-                    
-                        🎯
-                        Простой синтаксис
-                        
+                <h2 data-lang="home.features.title">Возможности ESYBOT</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title" data-lang="home.features.simple_syntax.title">Простой синтаксис</h3>
+                        <p class="feature-description" data-lang="home.features.simple_syntax.description">
                             Интуитивные команды для быстрого создания ботов без изучения сложного API
-                        
-                    
-                    
-                        🐍
-                        Python интеграция
-                        
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🐍</div>
+                        <h3 class="feature-title" data-lang="home.features.python_integration.title">Python интеграция</h3>
+                        <p class="feature-description" data-lang="home.features.python_integration.description">
                             Полная поддержка Python кода внутри ESYBOT с обменом переменными
-                        
-                    
-                    
-                        ⚡
-                        Поддержка aiogram
-                        
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title" data-lang="home.features.aiogram_support.title">Поддержка aiogram</h3>
+                        <p class="feature-description" data-lang="home.features.aiogram_support.description">
                             Все возможности aiogram 3.x доступны из коробки
-                        
-                    
-                    
-                        🔧
-                        Расширяемость
-                        
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3 class="feature-title" data-lang="home.features.extensible.title">Расширяемость</h3>
+                        <p class="feature-description" data-lang="home.features.extensible.description">
                             Легко добавляйте новые функции и интегрируйте с внешними сервисами
-                        
-                    
-                
+                        </p>
+                    </div>
+                </div>
 
-                Быстрый пример
-                Создайте своего первого бота за несколько минут:
+                <h2 data-lang="home.quick_example.title">Быстрый пример</h2>
+                <p data-lang="home.quick_example.description">Создайте своего первого бота за несколько минут:</p>
                 
-                
-                    Копировать
-                    # Простой бот на ESYBOT
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Простой бот на ESYBOT
 bot_token "YOUR_BOT_TOKEN"
 
 # Приветствие при старте
@@ -716,30 +713,30 @@ on_message "привет" {
         esybot_set('random_greeting', greeting)
     }
     reply $random_greeting
-}
-                
-            
+}</code></pre>
+                </div>
+            </div>
 
-            
-            
-                Начало работы с ESYBOT
-                
+            <!-- Начало работы -->
+            <div class="page" id="getting-started">
+                <h1 data-lang="getting_started.title">Начало работы с ESYBOT</h1>
+                <p class="lead" data-lang="getting_started.description">
                     Пошаговое руководство по установке и настройке ESYBOT для создания вашего первого Telegram бота.
-                
+                </p>
 
-                Установка
+                <h2 data-lang="getting_started.installation.title">Установка</h2>
                 
-                Требования
-                
-                    Python 3.8 или выше
-                    pip (менеджер пакетов Python)
-                    Токен Telegram бота от @BotFather
-                
+                <h3 data-lang="getting_started.installation.requirements">Требования</h3>
+                <ul>
+                    <li>Python 3.8 или выше</li>
+                    <li>pip (менеджер пакетов Python)</li>
+                    <li>Токен Telegram бота от @BotFather</li>
+                </ul>
 
-                Настройка окружения
-                
-                    Копировать
-                    # Создание виртуального окружения
+                <h3 data-lang="getting_started.installation.setup">Настройка окружения</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-bash"># Создание виртуального окружения
 python -m venv esybot-env
 
 # Активация окружения
@@ -749,32 +746,32 @@ esybot-env\Scripts\activate
 source esybot-env/bin/activate
 
 # Установка зависимостей
-pip install aiogram psutil
-                
+pip install aiogram psutil</code></pre>
+                </div>
 
-                Скачивание ESYBOT
-                
-                    Копировать
-                    # Клонирование репозитория
+                <h3 data-lang="getting_started.installation.download">Скачивание ESYBOT</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-bash"># Клонирование репозитория
 git clone https://github.com/your-username/esybot.git
 cd esybot
 
 # Или скачайте интерпретатор напрямую
-wget https://raw.githubusercontent.com/your-username/esybot/main/esybot_interpreter.py
-                
+wget https://raw.githubusercontent.com/your-username/esybot/main/esybot_interpreter.py</code></pre>
+                </div>
 
-                Первый бот
+                <h2 data-lang="getting_started.first_bot.title">Первый бот</h2>
 
-                
-                    💡 Совет: Перед началом получите токен бота у @BotFather в Telegram.
-                
+                <div class="alert alert-info">
+                    <strong>💡 Совет:</strong> Перед началом получите токен бота у @BotFather в Telegram.
+                </div>
 
-                1. Создание файла бота
-                Создайте файл my_first_bot.esi:
+                <h3 data-lang="getting_started.first_bot.create_file">1. Создание файла бота</h3>
+                <p>Создайте файл <code>my_first_bot.esi</code>:</p>
                 
-                
-                    Копировать
-                    # Мой первый ESYBOT бот
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Мой первый ESYBOT бот
 bot_token "ЗАМЕНИТЕ_НА_ВАШ_ТОКЕН"
 bot_name "MyFirstBot"
 
@@ -817,42 +814,42 @@ on_callback random_callback {
     }
     edit "🎲 Ваше случайное число: $random_number"
     answer_callback "Новое число сгенерировано!"
-}
-                
+}</code></pre>
+                </div>
 
-                2. Запуск бота
-                
-                    Копировать
-                    # Запуск интерпретатора
-python esybot_interpreter.py my_first_bot.esi
-                
+                <h3 data-lang="getting_started.first_bot.run_bot">2. Запуск бота</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-bash"># Запуск интерпретатора
+python esybot_interpreter.py my_first_bot.esi</code></pre>
+                </div>
 
-                
-                    🎉 Поздравляем! Ваш первый ESYBOT бот готов к использованию! Найдите его в Telegram и отправьте команду /start.
-                
+                <div class="alert alert-success">
+                    <strong>🎉 Поздравляем!</strong> Ваш первый ESYBOT бот готов к использованию! Найдите его в Telegram и отправьте команду /start.
+                </div>
 
-                Что дальше?
-                
-                    Изучите синтаксис ESYBOT
-                    Посмотрите примеры ботов
-                    Изучите интеграцию с Python
-                    Ознакомьтесь со всеми командами
-                
-            
+                <h3>Что дальше?</h3>
+                <ul>
+                    <li>Изучите <a onclick="showPage('syntax')" style="color: var(--primary-color); cursor: pointer;">синтаксис ESYBOT</a></li>
+                    <li>Посмотрите <a onclick="showPage('examples')" style="color: var(--primary-color); cursor: pointer;">примеры ботов</a></li>
+                    <li>Изучите <a onclick="showPage('python-integration')" style="color: var(--primary-color); cursor: pointer;">интеграцию с Python</a></li>
+                    <li>Ознакомьтесь со <a onclick="showPage('commands')" style="color: var(--primary-color); cursor: pointer;">всеми командами</a></li>
+                </ul>
+            </div>
 
-            
-            
-                Синтаксис ESYBOT
-                
+            <!-- Синтаксис -->
+            <div class="page" id="syntax">
+                <h1 data-lang="syntax.title">Синтаксис ESYBOT</h1>
+                <p class="lead" data-lang="syntax.description">
                     Полное описание синтаксиса и структуры языка ESYBOT с примерами использования.
-                
+                </p>
 
-                Базовая структура
-                Файл ESYBOT состоит из команд, блоков и комментариев:
+                <h2 data-lang="syntax.basic_structure">Базовая структура</h2>
+                <p>Файл ESYBOT состоит из команд, блоков и комментариев:</p>
                 
-                
-                    Копировать
-                    # Комментарий - игнорируется интерпретатором
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Комментарий - игнорируется интерпретатором
 
 # Конфигурация бота
 bot_token "YOUR_TOKEN"
@@ -865,29 +862,29 @@ set variable_name "значение"
 on_start {
     send "Привет!"
     reply "Как дела?"
-}
-                
+}</code></pre>
+                </div>
 
-                Комментарии
-                ESYBOT поддерживает однострочные комментарии, начинающиеся с # или //:
+                <h2 data-lang="syntax.comments">Комментарии</h2>
+                <p>ESYBOT поддерживает однострочные комментарии, начинающиеся с <code>#</code> или <code>//</code>:</p>
                 
-                
-                    Копировать
-                    # Это комментарий
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Это комментарий
 // Это тоже комментарий
 
 on_start {
     send "Привет!" # Комментарий в конце строки
     // reply "Эта строка закомментирована"
-}
-                
+}</code></pre>
+                </div>
 
-                Переменные
-                Переменные объявляются командой set и используются с префиксом $:
+                <h2 data-lang="syntax.variables">Переменные</h2>
+                <p>Переменные объявляются командой <code>set</code> и используются с префиксом <code>$</code>:</p>
                 
-                
-                    Копировать
-                    # Объявление переменных
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Объявление переменных
 set bot_name "МойБот"
 set user_count 0
 set is_active true
@@ -903,55 +900,55 @@ on_start {
 on_command stats {
     increment user_count
     send "Новое количество: $user_count"
-}
-                
+}</code></pre>
+                </div>
 
-                Типы данных
-                
-                    
-                        
-                            
-                                Тип
-                                Пример
-                                Описание
-                            
-                        
-                        
-                            
-                                Строка
-                                "Привет мир"
-                                Текст в кавычках
-                            
-                            
-                                Число
-                                42
-                                Целое число
-                            
-                            
-                                Дробь
-                                3.14
-                                Число с плавающей точкой
-                            
-                            
-                                Булево
-                                true / false
-                                Логическое значение
-                            
-                            
-                                Массив
-                                [1, 2, 3]
-                                Список значений
-                            
-                        
-                    
-                
+                <h3>Типы данных</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Тип</th>
+                                <th>Пример</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Строка</td>
+                                <td><code>"Привет мир"</code></td>
+                                <td>Текст в кавычках</td>
+                            </tr>
+                            <tr>
+                                <td>Число</td>
+                                <td><code>42</code></td>
+                                <td>Целое число</td>
+                            </tr>
+                            <tr>
+                                <td>Дробь</td>
+                                <td><code>3.14</code></td>
+                                <td>Число с плавающей точкой</td>
+                            </tr>
+                            <tr>
+                                <td>Булево</td>
+                                <td><code>true</code> / <code>false</code></td>
+                                <td>Логическое значение</td>
+                            </tr>
+                            <tr>
+                                <td>Массив</td>
+                                <td><code>[1, 2, 3]</code></td>
+                                <td>Список значений</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                Блоки кода
-                Блоки кода заключаются в фигурные скобки {}:
+                <h2 data-lang="syntax.blocks">Блоки кода</h2>
+                <p>Блоки кода заключаются в фигурные скобки <code>{}</code>:</p>
                 
-                
-                    Копировать
-                    # Простой блок
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Простой блок
 on_start {
     send "Одна команда"
 }
@@ -967,15 +964,15 @@ on_command help {
         # Python код тоже в блоках
         print("Справка показана пользователю")
     }
-}
-                
+}</code></pre>
+                </div>
 
-                Условия
-                ESYBOT поддерживает условные конструкции:
+                <h2 data-lang="syntax.conditionals">Условия</h2>
+                <p>ESYBOT поддерживает условные конструкции:</p>
                 
-                
-                    Копировать
-                    set admin_id 123456789
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot">set admin_id 123456789
 
 on_command admin {
     if $user_id == $admin_id {
@@ -985,55 +982,55 @@ on_command admin {
     if $user_id != $admin_id {
         send "У вас нет прав администратора"
     }
-}
-                
+}</code></pre>
+                </div>
 
-                Операторы сравнения
-                
-                    
-                        
-                            
-                                Оператор
-                                Описание
-                                Пример
-                            
-                        
-                        
-                            
-                                ==
-                                Равно
-                                if $count == 5
-                            
-                            
-                                !=
-                                Не равно
-                                if $name != "admin"
-                            
-                            
-                                &gt;
-                                Больше
-                                if $age > 18
-                            
-                            
-                                &lt;
-                                Меньше
-                                if $price 
-                            
-                            
-                                contains
-                                Содержит
-                                if $text contains "привет"
-                            
-                        
-                    
-                
+                <h3>Операторы сравнения</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Оператор</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>==</code></td>
+                                <td>Равно</td>
+                                <td><code>if $count == 5</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>!=</code></td>
+                                <td>Не равно</td>
+                                <td><code>if $name != "admin"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&gt;</code></td>
+                                <td>Больше</td>
+                                <td><code>if $age > 18</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;</code></td>
+                                <td>Меньше</td>
+                                <td><code>if $price < 100</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>contains</code></td>
+                                <td>Содержит</td>
+                                <td><code>if $text contains "привет"</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                Обработчики событий
-                Обработчики реагируют на различные события Telegram:
+                <h2 data-lang="syntax.handlers">Обработчики событий</h2>
+                <p>Обработчики реагируют на различные события Telegram:</p>
                 
-                
-                    Копировать
-                    # Обработчик команды /start
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Обработчик команды /start
 on_start {
     send "Бот запущен!"
 }
@@ -1062,190 +1059,190 @@ on_photo {
 on_callback button_data {
     edit "Кнопка нажата!"
     answer_callback "Готово!"
-}
-                
+}</code></pre>
+                </div>
 
-                
-                    💡 Совет: Используйте регулярные выражения в обработчиках, заключая их в /pattern/ для более гибкой обработки сообщений.
-                
-            
+                <div class="alert alert-info">
+                    <strong>💡 Совет:</strong> Используйте регулярные выражения в обработчиках, заключая их в <code>/pattern/</code> для более гибкой обработки сообщений.
+                </div>
+            </div>
 
-            
-            
-                Справочник команд
-                
+            <!-- Команды -->
+            <div class="page" id="commands">
+                <h1 data-lang="commands.title">Справочник команд</h1>
+                <p class="lead" data-lang="commands.description">
                     Полный список всех команд ESYBOT с описанием, параметрами и примерами использования.
-                
+                </p>
 
-                ⚙️ Конфигурация бота
-                
-                    
-                        
-                            
-                                Команда
-                                Описание
-                                Пример
-                            
-                        
-                        
-                            
-                                bot_token
-                                Устанавливает токен бота
-                                bot_token "YOUR_TOKEN"
-                            
-                            
-                                bot_name
-                                Имя бота
-                                bot_name "MyBot"
-                            
-                            
-                                bot_description
-                                Описание бота
-                                bot_description "Мой первый бот"
-                            
-                            
-                                bot_commands
-                                Список команд для меню
-                                См. пример ниже
-                            
-                        
-                    
-                
+                <h2 data-lang="commands.bot_config">⚙️ Конфигурация бота</h2>
+                <div class="command-table table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Команда</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="command-name">bot_token</span></td>
+                                <td>Устанавливает токен бота</td>
+                                <td><code>bot_token "YOUR_TOKEN"</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">bot_name</span></td>
+                                <td>Имя бота</td>
+                                <td><code>bot_name "MyBot"</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">bot_description</span></td>
+                                <td>Описание бота</td>
+                                <td><code>bot_description "Мой первый бот"</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">bot_commands</span></td>
+                                <td>Список команд для меню</td>
+                                <td>См. пример ниже</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                
-                    Копировать
-                    # Настройка команд бота
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Настройка команд бота
 bot_commands {
     start "Запустить бота"
     help "Получить справку"
     settings "Настройки"
     about "О боте"
-}
-                
+}</code></pre>
+                </div>
 
-                🎯 Обработчики событий
-                
-                    
-                        
-                            
-                                Обработчик
-                                Событие
-                                Пример
-                            
-                        
-                        
-                            
-                                on_start
-                                Команда /start
-                                on_start { send "Привет!" }
-                            
-                            
-                                on_command
-                                Произвольная команда
-                                on_command help { ... }
-                            
-                            
-                                on_message
-                                Текстовое сообщение
-                                on_message "привет" { ... }
-                            
-                            
-                                on_callback
-                                Нажатие кнопки
-                                on_callback btn_data { ... }
-                            
-                            
-                                on_photo
-                                Получение фото
-                                on_photo { reply "Фото получено!" }
-                            
-                            
-                                on_video
-                                Получение видео
-                                on_video { reply "Видео получено!" }
-                            
-                            
-                                on_document
-                                Получение документа
-                                on_document { reply "Документ получен!" }
-                            
-                            
-                                on_voice
-                                Голосовое сообщение
-                                on_voice { reply "Голос получен!" }
-                            
-                            
-                                on_location
-                                Получение геолокации
-                                on_location { reply "Локация получена!" }
-                            
-                            
-                                on_contact
-                                Получение контакта
-                                on_contact { reply "Контакт получен!" }
-                            
-                        
-                    
-                
+                <h2 data-lang="commands.handlers">🎯 Обработчики событий</h2>
+                <div class="command-table table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Обработчик</th>
+                                <th>Событие</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="command-name">on_start</span></td>
+                                <td>Команда /start</td>
+                                <td><code>on_start { send "Привет!" }</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">on_command</span></td>
+                                <td>Произвольная команда</td>
+                                <td><code>on_command help { ... }</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">on_message</span></td>
+                                <td>Текстовое сообщение</td>
+                                <td><code>on_message "привет" { ... }</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">on_callback</span></td>
+                                <td>Нажатие кнопки</td>
+                                <td><code>on_callback btn_data { ... }</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">on_photo</span></td>
+                                <td>Получение фото</td>
+                                <td><code>on_photo { reply "Фото получено!" }</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">on_video</span></td>
+                                <td>Получение видео</td>
+                                <td><code>on_video { reply "Видео получено!" }</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">on_document</span></td>
+                                <td>Получение документа</td>
+                                <td><code>on_document { reply "Документ получен!" }</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">on_voice</span></td>
+                                <td>Голосовое сообщение</td>
+                                <td><code>on_voice { reply "Голос получен!" }</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">on_location</span></td>
+                                <td>Получение геолокации</td>
+                                <td><code>on_location { reply "Локация получена!" }</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">on_contact</span></td>
+                                <td>Получение контакта</td>
+                                <td><code>on_contact { reply "Контакт получен!" }</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                💬 Ответы и действия
-                
-                    
-                        
-                            
-                                Команда
-                                Описание
-                                Параметры
-                            
-                        
-                        
-                            
-                                send
-                                Отправить сообщение
-                                keyboard, parse_mode
-                            
-                            
-                                reply
-                                Ответить на сообщение
-                                keyboard, parse_mode
-                            
-                            
-                                edit
-                                Редактировать сообщение
-                                keyboard, parse_mode
-                            
-                            
-                                delete
-                                Удалить сообщение
-                                Нет
-                            
-                            
-                                send_photo
-                                Отправить фото
-                                caption, keyboard
-                            
-                            
-                                send_video
-                                Отправить видео
-                                caption, keyboard
-                            
-                            
-                                send_document
-                                Отправить документ
-                                caption, keyboard
-                            
-                            
-                                answer_callback
-                                Ответить на callback
-                                alert
-                            
-                        
-                    
-                
+                <h2 data-lang="commands.responses">💬 Ответы и действия</h2>
+                <div class="command-table table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Команда</th>
+                                <th>Описание</th>
+                                <th>Параметры</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="command-name">send</span></td>
+                                <td>Отправить сообщение</td>
+                                <td><code>keyboard</code>, <code>parse_mode</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">reply</span></td>
+                                <td>Ответить на сообщение</td>
+                                <td><code>keyboard</code>, <code>parse_mode</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">edit</span></td>
+                                <td>Редактировать сообщение</td>
+                                <td><code>keyboard</code>, <code>parse_mode</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">delete</span></td>
+                                <td>Удалить сообщение</td>
+                                <td>Нет</td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">send_photo</span></td>
+                                <td>Отправить фото</td>
+                                <td><code>caption</code>, <code>keyboard</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">send_video</span></td>
+                                <td>Отправить видео</td>
+                                <td><code>caption</code>, <code>keyboard</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">send_document</span></td>
+                                <td>Отправить документ</td>
+                                <td><code>caption</code>, <code>keyboard</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">answer_callback</span></td>
+                                <td>Ответить на callback</td>
+                                <td><code>alert</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                
-                    Копировать
-                    # Примеры команд ответа
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Примеры команд ответа
 on_start {
     send "Простое сообщение"
     send "Сообщение с клавиатурой" keyboard=main_menu
@@ -1260,15 +1257,15 @@ on_photo {
 on_callback help_btn {
     edit "Текст справки"
     answer_callback "Справка показана!" alert=false
-}
-                
+}</code></pre>
+                </div>
 
-                ⌨️ Клавиатуры и меню
+                <h2 data-lang="commands.keyboards">⌨️ Клавиатуры и меню</h2>
                 
-                Inline клавиатуры
-                
-                    Копировать
-                    # Создание inline меню
+                <h3>Inline клавиатуры</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Создание inline меню
 menu main_menu {
     button "ℹ️ Информация" info_callback
     button "⚙️ Настройки" settings_callback
@@ -1279,13 +1276,13 @@ menu main_menu {
 # Использование меню
 on_start {
     send "Выберите действие:" keyboard=main_menu
-}
-                
+}</code></pre>
+                </div>
 
-                Reply клавиатуры
-                
-                    Копировать
-                    # Создание reply клавиатуры
+                <h3>Reply клавиатуры</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Создание reply клавиатуры
 keyboard reply_kb {
     button "🏠 Главная"
     button "📞 Контакты"
@@ -1293,89 +1290,89 @@ keyboard reply_kb {
 }
 
 # Удаление клавиатуры
-remove_keyboard hide_kb
-                
+remove_keyboard hide_kb</code></pre>
+                </div>
 
-                📊 Переменные
-                
-                    
-                        
-                            
-                                Команда
-                                Описание
-                                Пример
-                            
-                        
-                        
-                            
-                                set
-                                Установить переменную
-                                set name "Значение"
-                            
-                            
-                                get
-                                Получить переменную
-                                get name
-                            
-                            
-                                increment
-                                Увеличить на 1
-                                increment counter
-                            
-                            
-                                decrement
-                                Уменьшить на 1
-                                decrement counter
-                            
-                        
-                    
-                
+                <h2 data-lang="commands.variables">📊 Переменные</h2>
+                <div class="command-table table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Команда</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="command-name">set</span></td>
+                                <td>Установить переменную</td>
+                                <td><code>set name "Значение"</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">get</span></td>
+                                <td>Получить переменную</td>
+                                <td><code>get name</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">increment</span></td>
+                                <td>Увеличить на 1</td>
+                                <td><code>increment counter</code></td>
+                            </tr>
+                            <tr>
+                                <td><span class="command-name">decrement</span></td>
+                                <td>Уменьшить на 1</td>
+                                <td><code>decrement counter</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                Системные переменные
-                ESYBOT предоставляет доступ к контекстным переменным:
-                
-                    
-                        
-                            
-                                Переменная
-                                Описание
-                                Пример использования
-                            
-                        
-                        
-                            
-                                $user_id
-                                ID пользователя
-                                send "Ваш ID: $user_id"
-                            
-                            
-                                $chat_id
-                                ID чата
-                                send "ID чата: $chat_id"
-                            
-                            
-                                $text
-                                Текст сообщения
-                                send "Вы написали: $text"
-                            
-                            
-                                $first_name
-                                Имя пользователя
-                                send "Привет, $first_name!"
-                            
-                            
-                                $username
-                                Username пользователя
-                                send "Ваш username: $username"
-                            
-                        
-                    
-                
+                <h3>Системные переменные</h3>
+                <p>ESYBOT предоставляет доступ к контекстным переменным:</p>
+                <div class="command-table table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Переменная</th>
+                                <th>Описание</th>
+                                <th>Пример использования</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>$user_id</code></td>
+                                <td>ID пользователя</td>
+                                <td><code>send "Ваш ID: $user_id"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>$chat_id</code></td>
+                                <td>ID чата</td>
+                                <td><code>send "ID чата: $chat_id"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>$text</code></td>
+                                <td>Текст сообщения</td>
+                                <td><code>send "Вы написали: $text"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>$first_name</code></td>
+                                <td>Имя пользователя</td>
+                                <td><code>send "Привет, $first_name!"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>$username</code></td>
+                                <td>Username пользователя</td>
+                                <td><code>send "Ваш username: $username"</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                🔄 Состояния (FSM)
-                
-                    Копировать
-                    # Работа с состояниями
+                <h2 data-lang="commands.states">🔄 Состояния (FSM)</h2>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Работа с состояниями
 on_command register {
     send "Введите ваше имя:"
     set_state waiting_name
@@ -1393,27 +1390,27 @@ on_message {
         send "Регистрация завершена!\nИмя: $user_name\nВозраст: $user_age"
         clear_state
     }
-}
-                
+}</code></pre>
+                </div>
 
-                
-                    ⚠️ Внимание: Состояния работают только в приватных чатах с ботом. В группах используйте альтернативные подходы.
-                
-            
+                <div class="alert alert-warning">
+                    <strong>⚠️ Внимание:</strong> Состояния работают только в приватных чатах с ботом. В группах используйте альтернативные подходы.
+                </div>
+            </div>
 
-            
-            
-                Python интеграция
-                
+            <!-- Python интеграция -->
+            <div class="page" id="python-integration">
+                <h1 data-lang="python_integration.title">Python интеграция</h1>
+                <p class="lead" data-lang="python_integration.description">
                     Полное руководство по использованию Python кода внутри ESYBOT скриптов для создания мощных и гибких ботов.
-                
+                </p>
 
-                🐍 Основы Python блоков
-                Python код в ESYBOT заключается в блоки python { }:
+                <h2 data-lang="python_integration.basics">🐍 Основы Python блоков</h2>
+                <p>Python код в ESYBOT заключается в блоки <code>python { }</code>:</p>
                 
-                
-                    Копировать
-                    # Простой Python блок
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Простой Python блок
 on_start {
     python {
         print("Бот запущен!")
@@ -1423,15 +1420,15 @@ on_start {
     }
     
     send "Добро пожаловать!"
-}
-                
+}</code></pre>
+                </div>
 
-                🔄 Обмен переменными
-                Python код может читать и изменять переменные ESYBOT:
+                <h2 data-lang="python_integration.variable_sharing">🔄 Обмен переменными</h2>
+                <p>Python код может читать и изменять переменные ESYBOT:</p>
                 
-                
-                    Копировать
-                    # Установка переменных из ESYBOT
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Установка переменных из ESYBOT
 set user_count 0
 set bot_name "MyBot"
 
@@ -1457,45 +1454,45 @@ on_start {
     }
     
     send $welcome_message
-}
-                
+}</code></pre>
+                </div>
 
-                Функции для работы с переменными
-                
-                    
-                        
-                            
-                                Функция
-                                Описание
-                                Пример
-                            
-                        
-                        
-                            
-                                esybot_get(name)
-                                Получить переменную
-                                value = esybot_get('count')
-                            
-                            
-                                esybot_set(name, value)
-                                Установить переменную
-                                esybot_set('result', 42)
-                            
-                            
-                                esybot_vars
-                                Словарь всех переменных
-                                all_vars = esybot_vars
-                            
-                        
-                    
-                
+                <h3>Функции для работы с переменными</h3>
+                <div class="command-table table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Функция</th>
+                                <th>Описание</th>
+                                <th>Пример</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>esybot_get(name)</code></td>
+                                <td>Получить переменную</td>
+                                <td><code>value = esybot_get('count')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>esybot_set(name, value)</code></td>
+                                <td>Установить переменную</td>
+                                <td><code>esybot_set('result', 42)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>esybot_vars</code></td>
+                                <td>Словарь всех переменных</td>
+                                <td><code>all_vars = esybot_vars</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                📧 Доступ к контексту
-                В Python блоках доступны переменные контекста сообщения:
+                <h2 data-lang="python_integration.context_access">📧 Доступ к контексту</h2>
+                <p>В Python блоках доступны переменные контекста сообщения:</p>
                 
-                
-                    Копировать
-                    on_message {
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot">on_message {
     python {
         # Доступ к данным сообщения
         user_id = locals().get('user_id')
@@ -1526,15 +1523,15 @@ on_start {
     if $word_count > 5 {
         send "Ого, много слов! Количество: $word_count"
     }
-}
-                
+}</code></pre>
+                </div>
 
-                🚀 Продвинутые возможности
+                <h2 data-lang="python_integration.advanced_features">🚀 Продвинутые возможности</h2>
                 
-                Работа с внешними API
-                
-                    Копировать
-                    on_command weather {
+                <h3>Работа с внешними API</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot">on_command weather {
     python {
         import requests
         import json
@@ -1562,13 +1559,13 @@ on_start {
     }
     
     send $weather_result
-}
-                
+}</code></pre>
+                </div>
 
-                Работа с базами данных
-                
-                    Копировать
-                    on_command save_data {
+                <h3>Работа с базами данных</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot">on_command save_data {
     python {
         import sqlite3
         import os
@@ -1614,13 +1611,13 @@ on_start {
     }
     
     send "✅ Данные сохранены! Ваше сообщение №$user_message_count"
-}
-                
+}</code></pre>
+                </div>
 
-                Генерация изображений
-                
-                    Копировать
-                    on_command chart {
+                <h3>Генерация изображений</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot">on_command chart {
     python {
         import matplotlib.pyplot as plt
         import io
@@ -1658,26 +1655,26 @@ on_start {
     if $chart_ready == true {
         send_photo "chart.png" caption="📊 Ваш график готов!"
     }
-}
-                
+}</code></pre>
+                </div>
 
-                ✅ Лучшие практики
+                <h2 data-lang="python_integration.best_practices">✅ Лучшие практики</h2>
                 
-                
-                    💡 Рекомендации по использованию Python в ESYBOT:
-                    
-                        Обработка ошибок: Всегда используйте try-except блоки
-                        Производительность: Избегайте тяжёлых вычислений в обработчиках сообщений
-                        Безопасность: Проверяйте пользовательский ввод перед обработкой
-                        Логирование: Используйте print() для отладки
-                        Переменные: Используйте осмысленные имена переменных ESYBOT
-                    
-                
+                <div class="alert alert-info">
+                    <h4>💡 Рекомендации по использованию Python в ESYBOT:</h4>
+                    <ul>
+                        <li><strong>Обработка ошибок:</strong> Всегда используйте <code>try-except</code> блоки</li>
+                        <li><strong>Производительность:</strong> Избегайте тяжёлых вычислений в обработчиках сообщений</li>
+                        <li><strong>Безопасность:</strong> Проверяйте пользовательский ввод перед обработкой</li>
+                        <li><strong>Логирование:</strong> Используйте <code>print()</code> для отладки</li>
+                        <li><strong>Переменные:</strong> Используйте осмысленные имена переменных ESYBOT</li>
+                    </ul>
+                </div>
 
-                Пример комплексного бота
-                
-                    Копировать
-                    # Комплексный бот с Python интеграцией
+                <h3>Пример комплексного бота</h3>
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Комплексный бот с Python интеграцией
 bot_token "YOUR_TOKEN"
 
 # Инициализация
@@ -1768,27 +1765,27 @@ _Данные обновляются в реальном времени_
     
     edit $analytics_text parse_mode="Markdown"
     answer_callback "Аналитика обновлена!"
-}
-                
+}</code></pre>
+                </div>
 
-                
-                    🎉 Поздравляем! Теперь вы знаете, как использовать Python в ESYBOT для создания мощных и функциональных ботов!
-                
-            
+                <div class="alert alert-success">
+                    <strong>🎉 Поздравляем!</strong> Теперь вы знаете, как использовать Python в ESYBOT для создания мощных и функциональных ботов!
+                </div>
+            </div>
 
-            
-            
-                Примеры ботов
-                
+            <!-- Примеры -->
+            <div class="page" id="examples">
+                <h1 data-lang="examples.title">Примеры ботов</h1>
+                <p class="lead" data-lang="examples.description">
                     Готовые примеры ботов на ESYBOT для различных задач - от простых до сложных проектов.
-                
+                </p>
 
-                🤖 Простой бот
-                Базовый бот с приветствием, меню и обработкой команд:
+                <h2 data-lang="examples.simple_bot">🤖 Простой бот</h2>
+                <p>Базовый бот с приветствием, меню и обработкой команд:</p>
                 
-                
-                    Копировать
-                    # Простой бот на ESYBOT
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Простой бот на ESYBOT
 bot_token "YOUR_BOT_TOKEN"
 bot_name "SimpleBot"
 
@@ -1876,15 +1873,15 @@ on_message "привет" {
 
 on_message "пока" {
     reply "👋 До свидания! Возвращайся ещё!"
-}
-                
+}</code></pre>
+                </div>
 
-                🚀 Продвинутый бот
-                Бот с базой данных, аналитикой и внешними API:
+                <h2 data-lang="examples.advanced_bot">🚀 Продвинутый бот</h2>
+                <p>Бот с базой данных, аналитикой и внешними API:</p>
                 
-                
-                    Копировать
-                    # Продвинутый бот с полным функционалом
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Продвинутый бот с полным функционалом
 bot_token "YOUR_BOT_TOKEN"
 bot_name "AdvancedBot"
 bot_description "Продвинутый бот с множеством возможностей"
@@ -2145,7 +2142,47 @@ on_message {
                 elif attempts >= max_attempts:
                     result_msg = f"😔 Попытки закончились! Загаданное число было {secret}"
                     esybot_set('game_over', True)
-                elif guess  ?', (yesterday,))
+                elif guess < secret:
+                    result_msg = f"📈 Больше! Попытка {attempts}/{max_attempts}"
+                    esybot_set('game_over', False)
+                else:
+                    result_msg = f"📉 Меньше! Попытка {attempts}/{max_attempts}"
+                    esybot_set('game_over', False)
+                
+                esybot_set('game_result', result_msg)
+                
+            except ValueError:
+                esybot_set('game_result', "❌ Пожалуйста, введите число от 1 до 100")
+                esybot_set('game_over', False)
+        }
+        
+        reply $game_result
+        
+        if $game_over == true {
+            clear_state
+            send "Выберите действие:" keyboard=main_menu
+        }
+    }
+}
+
+# Админ панель
+on_command admin {
+    if $user_id == $admin_id {
+        python {
+            # Статистика для админа
+            conn = sqlite3.connect('advanced_bot.db')
+            cursor = conn.cursor()
+            
+            # Общая статистика
+            cursor.execute('SELECT COUNT(*) FROM users')
+            total_users = cursor.fetchone()[0]
+            
+            cursor.execute('SELECT COUNT(*) FROM messages')
+            total_messages = cursor.fetchone()[0]
+            
+            # Активные пользователи за последние 24 часа
+            yesterday = (datetime.now() - timedelta(days=1)).isoformat()
+            cursor.execute('SELECT COUNT(*) FROM users WHERE last_activity > ?', (yesterday,))
             active_users = cursor.fetchone()[0]
             
             admin_stats = f"""
@@ -2201,15 +2238,15 @@ on_message {
             conn.commit()
             conn.close()
     }
-}
-                
+}</code></pre>
+                </div>
 
-                🛍️ Бот интернет-магазина
-                Пример бота для электронной коммерции с каталогом товаров:
+                <h2 data-lang="examples.ecommerce_bot">🛍️ Бот интернет-магазина</h2>
+                <p>Пример бота для электронной коммерции с каталогом товаров:</p>
                 
-                
-                    Копировать
-                    # Бот интернет-магазина
+                <div class="example-container">
+                    <button class="copy-btn" onclick="copyCode(this)">Копировать</button>
+                    <pre><code class="language-esybot"># Бот интернет-магазина
 bot_token "YOUR_BOT_TOKEN"
 bot_name "ShopBot"
 
@@ -2318,7 +2355,7 @@ _Для заказа нажмите кнопку "В корзину"_
 # Добавление в корзину
 on_callback add_to_cart_btn {
     python {
-                current_product = esybot_get('current_product')
+        current_product = esybot_get('current_product')
         products = esybot_get('products')
         cart = esybot_get('cart', {})
         user_id = str(locals().get('user_id', 'unknown'))
